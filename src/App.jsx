@@ -277,8 +277,8 @@ export default function App() {
                 fontSize: "clamp(28px, 3.5vw, 44px)", color: "#f6f3ee",
                 lineHeight: 1.15, marginTop: "20px", letterSpacing: "-0.5px",
               }}>
-                Large companies are shedding engineers.<br />
-                The Mittelstand needs them.<br />
+                Senior engineering expertise exists.<br />
+                The Mittelstand can't access it.<br />
                 <span style={{ color: "var(--orange)" }}>Nobody is building the bridge.</span>
               </h2>
             </div>
@@ -287,7 +287,7 @@ export default function App() {
                 Mid-sized industrial companies run complex machines — but can't justify a full-time senior engineer. They rely on machine builders who are long gone, or on knowledge that lives only in one person's head.
               </p>
               <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#6b6860", lineHeight: 1.9, fontWeight: 300, marginTop: "20px" }}>
-                Meanwhile, experienced engineers are being displaced by restructuring at larger corporations. The expertise exists. The need exists. The connection doesn't.
+                Meanwhile, many experienced engineers want flexible, meaningful work — not tied to one employer, not reduced to hourly gigs. The expertise exists. The need exists. The connection doesn't.
               </p>
               <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#f6f3ee", lineHeight: 1.9, fontWeight: 400, marginTop: "20px" }}>
                 Vakwerk is that bridge.
@@ -460,7 +460,7 @@ export default function App() {
                 Mechanical engineer with 20+ years of industrial experience and 3+ years operating as a freelance engineering partner — spanning mechanical design, PLC control, browser-based HMI development and time-series data infrastructure.
               </p>
               <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "var(--gray)", lineHeight: 1.9, fontWeight: 300, marginTop: "20px" }}>
-                Vakwerk was built on a simple observation: the engineers the Mittelstand needs most are exactly the ones being displaced by large-company restructuring. The goal is to close that gap — with people who take ownership, not just fill seats.
+                That combination — mechanical, PLC, web, data — is rare enough that most companies assemble it across three or four people. Vakwerk started as one engineer covering the full span, and is built to grow into a small network of senior partners working the same way.
               </p>
               <div style={{ marginTop: "32px", paddingTop: "32px", borderTop: "1px solid var(--line)" }}>
                 <Label>Disciplines</Label>
@@ -483,7 +483,7 @@ export default function App() {
             Got a problem<br />worth solving<span style={{ color: "var(--orange)" }}>?</span>
           </h2>
           <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#6b6860", lineHeight: 1.9, marginTop: "32px", maxWidth: "440px", fontWeight: 300 }}>
-            We work with a small number of clients at any time. If your machine needs engineering ownership — not just a consultant — let's have a direct conversation.
+            We work with a small number of clients at any time. If that's a fit, let's have a direct conversation.
           </p>
           <div style={{ marginTop: "48px" }}>
             <a href="mailto:info@hermandejong.de" className="cta-btn">
