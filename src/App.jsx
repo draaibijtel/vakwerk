@@ -169,6 +169,8 @@ function TrussOnly({ width = 300, height = 40, panels = 6, color = "#e03d00", op
     </svg>
   );
 }
+
+const Label = ({ children, style = {} }) => (
   <span style={{ fontFamily: "var(--mono)", fontSize: "11.5px", color: "var(--gray)", letterSpacing: "2px", textTransform: "uppercase", ...style }}>
     {children}
   </span>
