@@ -145,7 +145,6 @@ function VakwerkLogo({ width = 640, dark = false, showTagline = false, panels = 
     </svg>
   );
 }
-}
 
 function TrussOnly({ width = 300, height = 40, panels = 6, color = "#e03d00", opacity = 0.3 }) {
   const W = 1000;
