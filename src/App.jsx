@@ -103,27 +103,33 @@ const css = `
   ::-webkit-scrollbar-thumb { background: var(--orange); }
 `;
 
-function TrussSVG({ width = 480, height = 56, color = "#e03d00", opacity = 0.3 }) {
-  const panels = 6;
-  const pw = width / panels;
+function TrussSVG({ panels = 6, height = 32, color = "#e03d00", opacity = 0.3 }) {
+  const W = 1000;
+  const pw = W / panels;
   const lines = [];
-  lines.push(<line key="tc" x1={0} y1={0} x2={width} y2={0} strokeWidth={1.4} />);
-  lines.push(<line key="bc" x1={0} y1={height} x2={width} y2={height} strokeWidth={1.4} />);
-  lines.push(<line key="ep0" x1={0} y1={0} x2={0} y2={height} strokeWidth={1.4} />);
-  lines.push(<line key="epn" x1={width} y1={0} x2={width} y2={height} strokeWidth={1.4} />);
+  // bottom chord — full width
+  lines.push(<line key="bc" x1={0} y1={height} x2={W} y2={height} strokeWidth={1.8} />);
+  // top chord — shortened between first and last node (triangular ends)
+  lines.push(<line key="tc" x1={pw} y1={0} x2={(panels - 1) * pw} y2={0} strokeWidth={1.8} />);
+  // inclined end posts
+  lines.push(<line key="lep" x1={0} y1={height} x2={pw} y2={0} strokeWidth={1.8} />);
+  lines.push(<line key="rep" x1={(panels - 1) * pw} y1={0} x2={W} y2={height} strokeWidth={1.8} />);
+  // interior verticals
   for (let i = 1; i < panels; i++) {
-    lines.push(<line key={`v${i}`} x1={i * pw} y1={0} x2={i * pw} y2={height} strokeWidth={0.8} />);
-    if (i % 2 === 0) {
-      lines.push(<line key={`d${i}`} x1={(i - 1) * pw} y1={0} x2={i * pw} y2={height} strokeWidth={0.8} />);
+    lines.push(<line key={`v${i}`} x1={i * pw} y1={0} x2={i * pw} y2={height} strokeWidth={1} />);
+  }
+  // interior diagonals — Warren style
+  for (let i = 1; i < panels - 1; i++) {
+    if (i % 2 === 1) {
+      lines.push(<line key={`d${i}`} x1={i * pw} y1={0} x2={(i + 1) * pw} y2={height} strokeWidth={1} />);
     } else {
-      lines.push(<line key={`d${i}`} x1={(i - 1) * pw} y1={height} x2={i * pw} y2={0} strokeWidth={0.8} />);
+      lines.push(<line key={`d${i}`} x1={i * pw} y1={height} x2={(i + 1) * pw} y2={0} strokeWidth={1} />);
     }
   }
-  lines.push(<line key="dlast" x1={(panels - 1) * pw} y1={0} x2={panels * pw} y2={height} strokeWidth={0.8} />);
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} fill="none"
-      style={{ width: "100%", maxWidth: width, display: "block" }}
-      stroke={color} strokeLinecap="round" opacity={opacity}>
+    <svg viewBox={`0 0 ${W} ${height}`} preserveAspectRatio="none" fill="none"
+      style={{ width: "100%", height, display: "block" }}
+      stroke={color} strokeLinecap="round" strokeLinejoin="round" opacity={opacity}>
       {lines}
     </svg>
   );
@@ -187,8 +193,8 @@ export default function App() {
             VAK<span style={{ color: "var(--orange)" }}>W</span>ERK
           </h1>
 
-          <div className="f3" style={{ marginTop: "28px", maxWidth: "640px" }}>
-            <TrussSVG width={640} height={52} color="#e03d00" opacity={0.3} />
+          <div className="f3" style={{ marginTop: "28px" }}>
+            <TrussSVG panels={6} height={32} color="#e03d00" opacity={0.35} />
           </div>
 
           <p className="f4" style={{
@@ -305,8 +311,8 @@ export default function App() {
                 Engineering capacity<br />at the scale you need.
               </h2>
             </div>
-            <div style={{ maxWidth: "280px", opacity: 0.15 }}>
-              <TrussSVG width={280} height={40} color="#090807" opacity={1} />
+            <div style={{ width: "280px", opacity: 0.15 }}>
+              <TrussSVG panels={6} height={32} color="#090807" opacity={1} />
             </div>
           </div>
 
@@ -425,7 +431,7 @@ export default function App() {
             </a>
           </div>
           <div style={{ marginTop: "80px", paddingTop: "48px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-            <TrussSVG width={520} height={52} color="#f6f3ee" opacity={0.07} />
+            <TrussSVG panels={6} height={32} color="#f6f3ee" opacity={0.07} />
           </div>
         </div>
       </section>
