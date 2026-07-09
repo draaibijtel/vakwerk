@@ -146,6 +146,48 @@ function VakwerkLogo({ width = 640, dark = false, showTagline = false, panels = 
   );
 }
 
+function BrokenTruss({ width = 500, height = 44, panels = 3, gapFrac = 0.16, color = "#e03d00", opacity = 0.5 }) {
+  const W = 1000;
+  const gap = W * gapFrac;
+  const halfSpan = (W - gap) / 2;
+  const pw = halfSpan / panels;
+
+  const buildHalf = (x0, mirrored) => {
+    const lines = [];
+    const sign = mirrored ? -1 : 1;
+    // bottom chord for this half
+    lines.push(<line key={`bc-${mirrored}`} x1={x0} y1={height} x2={x0 + sign * halfSpan} y2={height} strokeWidth={5} />);
+    // outer raker end (triangular), inner end cut straight (unfinished look)
+    const outerX = mirrored ? x0 - halfSpan : x0 + halfSpan;
+    const firstNodeX = mirrored ? x0 - pw : x0 + pw;
+    lines.push(<line key={`tc-${mirrored}`} x1={firstNodeX} y1={0} x2={x0 + sign * (halfSpan - pw) + (mirrored ? pw * 0 : 0)} y2={0} strokeWidth={5} />);
+    lines.push(<line key={`ep-${mirrored}`} x1={x0} y1={height} x2={firstNodeX} y2={0} strokeWidth={5} />);
+    // inner vertical (the "cut" edge, unfinished)
+    lines.push(<line key={`cut-${mirrored}`} x1={outerX} y1={0} x2={outerX} y2={height} strokeWidth={5} strokeDasharray="6 6" opacity={0.6} />);
+    // interior verticals + diagonals
+    for (let i = 1; i < panels; i++) {
+      const x = x0 + sign * i * pw;
+      lines.push(<line key={`v-${mirrored}-${i}`} x1={x} y1={0} x2={x} y2={height} strokeWidth={3} />);
+    }
+    for (let i = 0; i < panels - 1; i++) {
+      const xa = x0 + sign * i * pw;
+      const xb = x0 + sign * (i + 1) * pw;
+      if (i % 2 === 0) lines.push(<line key={`d-${mirrored}-${i}`} x1={xa} y1={height} x2={xb} y2={0} strokeWidth={3} />);
+      else lines.push(<line key={`d-${mirrored}-${i}`} x1={xa} y1={0} x2={xb} y2={height} strokeWidth={3} />);
+    }
+    return lines;
+  };
+
+  return (
+    <svg viewBox={`0 0 ${W} ${height}`} preserveAspectRatio="none" fill="none"
+      style={{ width, height, display: "block" }}
+      stroke={color} strokeLinecap="round" strokeLinejoin="round" opacity={opacity}>
+      {buildHalf(0, false)}
+      {buildHalf(W, true)}
+    </svg>
+  );
+}
+
 function TrussOnly({ width = 300, height = 40, panels = 6, color = "#e03d00", opacity = 0.3 }) {
   const W = 1000;
   const pw = W / panels;
@@ -277,10 +319,16 @@ export default function App() {
                 fontSize: "clamp(28px, 3.5vw, 44px)", color: "#f6f3ee",
                 lineHeight: 1.15, marginTop: "20px", letterSpacing: "-0.5px",
               }}>
-                Senior engineering expertise is scarce.<br />
-                Too many Mittelstand companies can't reach it.<br />
-                <span style={{ color: "var(--orange)" }}>Too few are building that bridge.</span>
+                Expertise: rare.<br />
+                Access: rarer.<br />
+                <span style={{ color: "var(--orange)" }}>The bridge: missing.</span>
               </h2>
+
+              {/* the graph: a truss with the middle deliberately unbuilt */}
+              <div style={{ marginTop: "36px" }}>
+                <BrokenTruss width={340} height={30} panels={3} gapFrac={0.18} color="#e03d00" opacity={0.55} />
+              </div>
+              <Label style={{ marginTop: "10px", display: "block", color: "#4a453d" }}>Two sides. No span between them. Yet.</Label>
             </div>
             <div style={{ paddingTop: "4px" }}>
               <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#6b6860", lineHeight: 1.9, fontWeight: 300 }}>
