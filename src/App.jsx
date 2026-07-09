@@ -395,13 +395,13 @@ export default function App() {
               {
                 num: "I",
                 title: "Fractional Plant Engineer",
-                body: "Ongoing engineering partnership for your production environment. PLC logic, machine health, process optimisation, CE compliance — owned by us, not delegated.",
+                body: "Someone who knows your machines as well as you do. Health checks, small fixes before they become downtime, full visibility into what's actually happening on the floor — owned by us, not delegated.",
                 tags: ["Retainer-based", "Proactive", "Embedded"],
               },
               {
                 num: "II",
                 title: "Fractional R&D Engineer",
-                body: "New machine concepts, test rigs, smart automation — from first sketch to commissioned system. Mechanical design, PLC, HMI and data layer in one scope.",
+                body: "New machine concepts, test rigs, smart automation — from first sketch to a commissioned, working system. One point of contact, not three vendors to coordinate.",
                 tags: ["Fixed scope", "Full-stack", "New builds"],
               },
               {
