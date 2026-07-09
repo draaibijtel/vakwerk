@@ -200,7 +200,7 @@ export default function App() {
         </div>
 
         <div style={{ padding: "32px var(--pad) 0", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <div style={{ display: "inline-block" }}>
+          <div style={{ display: "inline-block", alignSelf: "flex-start" }}>
             <h1 ref={wordmarkRef} className="f2 hero-word" style={{
               fontFamily: "var(--display)", fontWeight: 700,
               fontSize: "clamp(72px, 12vw, 148px)",
