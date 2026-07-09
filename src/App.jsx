@@ -428,10 +428,10 @@ export default function App() {
           <div style={{ marginTop: "88px", paddingTop: "56px", borderTop: "1px solid var(--line)" }}>
             <Label>How the retainer scales</Label>
             <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.7, marginTop: "14px", maxWidth: "560px", fontWeight: 300 }}>
-              Engagements start small and grow only as far as the operation needs.
+              Every engagement starts small and grows only as far as the operation needs.
             </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 40px", marginTop: "56px", alignItems: "end" }} className="three-col">
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 40px", marginTop: "56px", alignItems: "start" }} className="three-col">
               {[
                 { tier: "Foundation", cadence: "≈ 2 days / month", panels: 3, trussW: 160, trussH: 22,
                   desc: "Preventive checks, system health monitoring, remote support on call." },
