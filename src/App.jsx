@@ -243,7 +243,7 @@ export default function App() {
           </span>
         </a>
         <div className="nav-links" style={{ display: "flex", gap: "36px", alignItems: "center" }}>
-          {[["#services", "Services"], ["#stack", "Stack"], ["#founder", "Founder"]].map(([href, label]) => (
+          {[["#services", "Services"], ["#founder", "Founder"]].map(([href, label]) => (
             <a key={href} href={href} className="nav-link">{label}</a>
           ))}
           <a href="#contact" style={{
@@ -458,33 +458,32 @@ export default function App() {
               <Label>More commitment</Label>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section id="stack" style={{ padding: "120px var(--pad)", background: "#f0ece4", borderTop: "1px solid var(--line)" }} className="section-pad">
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <Label>The disciplines</Label>
-          <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(28px, 4vw, 46px)", marginTop: "16px", letterSpacing: "-0.5px", lineHeight: 1 }}>
-            From bolt to browser.
-          </h2>
-          <div style={{ marginTop: "56px" }}>
-            {[
-              { num: "01", label: "Mechanical Design", desc: "Mechanisms, fixtures, test rigs. Designed for manufacturability, built to last.", tags: "SolidWorks · FEA · GD&T · BOM" },
-              { num: "02", label: "PLC & Control", desc: "Deterministic machine logic. State machines, motion coordination, safety, fault handling.", tags: "Allen Bradley · Beckhoff · IEC 61131-3" },
-              { num: "03", label: "Browser HMI", desc: "No SCADA licences. Any device, any browser. Real-time data, alarms, user management.", tags: "React · WebSocket · REST · Node-RED" },
-              { num: "04", label: "Time-Series Data", desc: "Every cycle logged. OEE, torque curves, Pareto analysis, anomaly detection.", tags: "InfluxDB · Grafana · Flux · MQTT" },
-            ].map((d, i) => (
-              <div key={i} className="disc-item">
-                <Label style={{ color: "var(--orange)", paddingTop: "2px" }}>{d.num}</Label>
-                <div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
-                    <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px" }}>{d.label}</h3>
-                    <Label>{d.tags}</Label>
+          {/* Disciplines — the technical engine behind the three services above, not a separate pitch */}
+          <div style={{ marginTop: "88px", paddingTop: "56px", borderTop: "1px solid var(--line)" }}>
+            <Label>Built from four disciplines</Label>
+            <h3 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(24px, 3.2vw, 34px)", marginTop: "14px", letterSpacing: "-0.4px", lineHeight: 1.1 }}>
+              From bolt to browser.
+            </h3>
+            <div style={{ marginTop: "40px" }}>
+              {[
+                { num: "01", label: "Mechanical Design", desc: "Mechanisms, fixtures, test rigs. Designed for manufacturability, built to last.", tags: "SolidWorks · FEA · GD&T · BOM" },
+                { num: "02", label: "PLC & Control", desc: "Deterministic machine logic. State machines, motion coordination, safety, fault handling.", tags: "Allen Bradley · Beckhoff · IEC 61131-3" },
+                { num: "03", label: "Browser HMI", desc: "No SCADA licences. Any device, any browser. Real-time data, alarms, user management.", tags: "React · WebSocket · REST · Node-RED" },
+                { num: "04", label: "Time-Series Data", desc: "Every cycle logged. OEE, torque curves, Pareto analysis, anomaly detection.", tags: "InfluxDB · Grafana · Flux · MQTT" },
+              ].map((d, i) => (
+                <div key={i} className="disc-item">
+                  <Label style={{ color: "var(--orange)", paddingTop: "2px" }}>{d.num}</Label>
+                  <div>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
+                      <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px" }}>{d.label}</h3>
+                      <Label>{d.tags}</Label>
+                    </div>
+                    <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.8, marginTop: "8px", fontWeight: 300 }}>{d.desc}</p>
                   </div>
-                  <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.8, marginTop: "8px", fontWeight: 300 }}>{d.desc}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
