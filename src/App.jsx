@@ -136,7 +136,7 @@ function TrussSVG({ panels = 6, height = 32, color = "#e03d00", opacity = 0.3 })
 }
 
 const Label = ({ children, style = {} }) => (
-  <span style={{ fontFamily: "var(--mono)", fontSize: "10px", color: "var(--gray)", letterSpacing: "2px", textTransform: "uppercase", ...style }}>
+  <span style={{ fontFamily: "var(--mono)", fontSize: "11.5px", color: "var(--gray)", letterSpacing: "2px", textTransform: "uppercase", ...style }}>
     {children}
   </span>
 );
@@ -185,20 +185,23 @@ export default function App() {
         </div>
 
         <div style={{ padding: "32px var(--pad) 0", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <h1 className="f2 hero-word" style={{
-            fontFamily: "var(--display)", fontWeight: 700,
-            fontSize: "clamp(72px, 12vw, 148px)",
-            lineHeight: 0.88, letterSpacing: "-3px", color: "var(--black)",
-          }}>
-            VAK<span style={{ color: "var(--orange)" }}>W</span>ERK
-          </h1>
+          <div style={{ display: "inline-block" }}>
+            <h1 className="f2 hero-word" style={{
+              fontFamily: "var(--display)", fontWeight: 700,
+              fontSize: "clamp(72px, 12vw, 148px)",
+              lineHeight: 0.88, letterSpacing: "-3px", color: "var(--black)",
+              whiteSpace: "nowrap",
+            }}>
+              VAK<span style={{ color: "var(--orange)" }}>W</span>ERK
+            </h1>
 
-          <div className="f3" style={{ marginTop: "28px" }}>
-            <TrussSVG panels={6} height={32} color="#e03d00" opacity={0.35} />
+            <div className="f3" style={{ marginTop: "28px" }}>
+              <TrussSVG panels={6} height={32} color="#e03d00" opacity={0.35} />
+            </div>
           </div>
 
           <p className="f4" style={{
-            fontFamily: "var(--display)", fontWeight: 300, fontSize: "18px",
+            fontFamily: "var(--display)", fontWeight: 300, fontSize: "20px",
             color: "var(--gray)", marginTop: "32px", maxWidth: "500px", lineHeight: 1.6,
           }}>
             We solve industrial engineering problems for the Mittelstand —
@@ -256,13 +259,13 @@ export default function App() {
               </h2>
             </div>
             <div style={{ paddingTop: "4px" }}>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "#6b6860", lineHeight: 2, fontWeight: 300 }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#6b6860", lineHeight: 1.9, fontWeight: 300 }}>
                 Mid-sized industrial companies run complex machines — but can't justify a full-time senior engineer. They rely on machine builders who are long gone, or on knowledge that lives only in one person's head.
               </p>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "#6b6860", lineHeight: 2, fontWeight: 300, marginTop: "20px" }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#6b6860", lineHeight: 1.9, fontWeight: 300, marginTop: "20px" }}>
                 Meanwhile, experienced engineers are being displaced by restructuring at larger corporations. The expertise exists. The need exists. The connection doesn't.
               </p>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "#f6f3ee", lineHeight: 2, fontWeight: 400, marginTop: "20px" }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#f6f3ee", lineHeight: 1.9, fontWeight: 400, marginTop: "20px" }}>
                 Vakwerk is that bridge.
               </p>
             </div>
@@ -283,7 +286,7 @@ export default function App() {
                 <Rule />
                 <p className="manifesto-text" style={{
                   fontFamily: "var(--display)", fontWeight: 600,
-                  fontSize: "clamp(22px, 3vw, 38px)", lineHeight: 1.2,
+                  fontSize: "clamp(24px, 3.2vw, 42px)", lineHeight: 1.25,
                   padding: "28px 0", letterSpacing: "-0.3px",
                   color: hovered === i ? "var(--orange)" : "var(--black)",
                   paddingLeft: hovered === i ? "12px" : "0",
@@ -339,7 +342,7 @@ export default function App() {
               <div key={i} className="svc-card">
                 <Label style={{ color: "var(--orange)", fontSize: "11px", marginBottom: "20px", display: "block" }}>{s.num}</Label>
                 <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "19px", lineHeight: 1.2, letterSpacing: "-0.2px" }}>{s.title}</h3>
-                <p style={{ fontFamily: "var(--mono)", fontSize: "11px", color: "var(--gray)", lineHeight: 1.9, marginTop: "16px", fontWeight: 300 }}>{s.body}</p>
+                <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.85, marginTop: "16px", fontWeight: 300 }}>{s.body}</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "20px" }}>
                   {s.tags.map(t => (
                     <span key={t} style={{ fontFamily: "var(--mono)", fontSize: "9px", letterSpacing: "1px", textTransform: "uppercase", color: "var(--gray)", border: "1px solid var(--line)", padding: "3px 8px" }}>{t}</span>
@@ -372,7 +375,7 @@ export default function App() {
                     <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "18px" }}>{d.label}</h3>
                     <Label>{d.tags}</Label>
                   </div>
-                  <p style={{ fontFamily: "var(--mono)", fontSize: "11px", color: "var(--gray)", lineHeight: 1.8, marginTop: "8px", fontWeight: 300 }}>{d.desc}</p>
+                  <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.8, marginTop: "8px", fontWeight: 300 }}>{d.desc}</p>
                 </div>
               </div>
             ))}
@@ -395,10 +398,10 @@ export default function App() {
               </div>
             </div>
             <div>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "var(--gray)", lineHeight: 2, fontWeight: 300 }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "var(--gray)", lineHeight: 1.9, fontWeight: 300 }}>
                 Mechanical engineer with 20+ years of industrial experience and 3+ years operating as a freelance engineering partner — spanning mechanical design, PLC control, browser-based HMI development and time-series data infrastructure.
               </p>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "var(--gray)", lineHeight: 2, fontWeight: 300, marginTop: "20px" }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "var(--gray)", lineHeight: 1.9, fontWeight: 300, marginTop: "20px" }}>
                 Vakwerk was built on a simple observation: the engineers the Mittelstand needs most are exactly the ones being displaced by large-company restructuring. The goal is to close that gap — with people who take ownership, not just fill seats.
               </p>
               <div style={{ marginTop: "32px", paddingTop: "32px", borderTop: "1px solid var(--line)" }}>
@@ -421,7 +424,7 @@ export default function App() {
           <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(36px, 6vw, 70px)", color: "#f6f3ee", lineHeight: 0.95, marginTop: "20px", letterSpacing: "-1px" }}>
             Got a problem<br />worth solving<span style={{ color: "var(--orange)" }}>?</span>
           </h2>
-          <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "#6b6860", lineHeight: 2, marginTop: "32px", maxWidth: "440px", fontWeight: 300 }}>
+          <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#6b6860", lineHeight: 1.9, marginTop: "32px", maxWidth: "440px", fontWeight: 300 }}>
             We work with a small number of clients at any time. If your machine needs engineering ownership — not just a consultant — let's have a direct conversation.
           </p>
           <div style={{ marginTop: "48px" }}>
