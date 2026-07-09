@@ -277,14 +277,14 @@ export default function App() {
                 fontSize: "clamp(28px, 3.5vw, 44px)", color: "#f6f3ee",
                 lineHeight: 1.15, marginTop: "20px", letterSpacing: "-0.5px",
               }}>
-                Senior engineering expertise exists.<br />
-                The Mittelstand can't access it.<br />
-                <span style={{ color: "var(--orange)" }}>Nobody is building the bridge.</span>
+                Senior engineering expertise is scarce.<br />
+                Too many Mittelstand companies can't reach it.<br />
+                <span style={{ color: "var(--orange)" }}>Too few are building that bridge.</span>
               </h2>
             </div>
             <div style={{ paddingTop: "4px" }}>
               <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#6b6860", lineHeight: 1.9, fontWeight: 300 }}>
-                Mid-sized industrial companies run complex machines — but can't justify a full-time senior engineer. They rely on machine builders who are long gone, or on knowledge that lives only in one person's head.
+                Mid-sized industrial companies run complex machines — but often can't justify a full-time senior engineer. They rely on machine builders who are long gone, or on knowledge that lives only in one person's head.
               </p>
               <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#6b6860", lineHeight: 1.9, fontWeight: 300, marginTop: "20px" }}>
                 Meanwhile, many experienced engineers want flexible, meaningful work — not tied to one employer, not reduced to hourly gigs. The expertise exists. The need exists. The connection doesn't.
@@ -364,8 +364,8 @@ export default function App() {
               },
             ].map((s, i) => (
               <div key={i} className="svc-card">
-                <Label style={{ color: "var(--orange)", fontSize: "11px", marginBottom: "20px", display: "block" }}>{s.num}</Label>
-                <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "21px", lineHeight: 1.2, letterSpacing: "-0.2px" }}>{s.title}</h3>
+                <Label style={{ color: "var(--orange)", marginBottom: "20px", display: "block" }}>{s.num}</Label>
+                <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px", lineHeight: 1.2, letterSpacing: "-0.2px" }}>{s.title}</h3>
                 <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.85, marginTop: "16px", fontWeight: 300 }}>{s.body}</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "20px" }}>
                   {s.tags.map(t => (
@@ -388,7 +388,7 @@ export default function App() {
                 { tier: "Foundation", cadence: "≈ 2 days / month", panels: 3, trussW: 160, trussH: 22,
                   desc: "Preventive checks, system health monitoring, remote support on call." },
                 { tier: "Active Partner", cadence: "≈ 4–6 days / month", panels: 5, trussW: 240, trussH: 34,
-                  desc: "Above, plus active improvements, data analysis, CE documentation." },
+                  desc: "Everything in Foundation, plus active improvements, data analysis, CE documentation." },
                 { tier: "Project Burst", cadence: "Defined scope", panels: 8, trussW: 320, trussH: 48,
                   desc: "Larger builds layered on top — fixed scope, fixed price." },
               ].map((t, i) => (
@@ -399,7 +399,7 @@ export default function App() {
                   <div style={{ height: "56px", display: "flex", alignItems: "flex-end", marginBottom: "16px" }}>
                     <TrussOnly width={t.trussW} height={t.trussH} panels={t.panels} color="#e03d00" opacity={0.5} />
                   </div>
-                  <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "var(--gray)", lineHeight: 1.8, fontWeight: 300, maxWidth: "260px" }}>{t.desc}</p>
+                  <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.8, fontWeight: 300, maxWidth: "260px" }}>{t.desc}</p>
                 </div>
               ))}
             </div>
@@ -430,7 +430,7 @@ export default function App() {
                 <Label style={{ color: "var(--orange)", paddingTop: "2px" }}>{d.num}</Label>
                 <div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
-                    <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "19px" }}>{d.label}</h3>
+                    <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px" }}>{d.label}</h3>
                     <Label>{d.tags}</Label>
                   </div>
                   <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.8, marginTop: "8px", fontWeight: 300 }}>{d.desc}</p>
@@ -499,7 +499,7 @@ export default function App() {
       {/* FOOTER */}
       <footer style={{ borderTop: "1px solid var(--line)", padding: "20px var(--pad)", background: "var(--white)" }}>
         <div className="footer-inner" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "14px", letterSpacing: "-0.2px" }}>
+          <span style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "15px", letterSpacing: "-0.2px" }}>
             Vakwerk<span style={{ color: "var(--orange)" }}>.</span>
           </span>
           <Label>Engineering Partners · Germany</Label>
