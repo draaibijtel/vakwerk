@@ -379,9 +379,8 @@ export default function App() {
           {/* Retainer scale — belongs to "Fractional Plant Engineer" above, not a separate pitch */}
           <div style={{ marginTop: "88px", paddingTop: "56px", borderTop: "1px solid var(--line)" }}>
             <Label>How the retainer scales</Label>
-            <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.85, marginTop: "14px", maxWidth: "560px", fontWeight: 300 }}>
-              Engagements start small and grow only as far as the operation needs. No fixed pricing shown —
-              the visual below is the shape of the commitment, not the cost.
+            <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.7, marginTop: "14px", maxWidth: "560px", fontWeight: 300 }}>
+              Engagements start small and grow only as far as the operation needs.
             </p>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 40px", marginTop: "56px", alignItems: "end" }} className="three-col">
