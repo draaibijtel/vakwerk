@@ -201,7 +201,7 @@ export default function App() {
           </span>
         </a>
         <div className="nav-links" style={{ display: "flex", gap: "36px", alignItems: "center" }}>
-          {[["#services", "Services"], ["#retainer", "Retainer"], ["#stack", "Stack"], ["#founder", "Founder"]].map(([href, label]) => (
+          {[["#services", "Services"], ["#stack", "Stack"], ["#founder", "Founder"]].map(([href, label]) => (
             <a key={href} href={href} className="nav-link">{label}</a>
           ))}
           <a href="#contact" style={{
@@ -354,7 +354,7 @@ export default function App() {
                 num: "II",
                 title: "Fractional R&D Engineer",
                 body: "New machine concepts, test rigs, smart automation — from first sketch to commissioned system. Mechanical design, PLC, HMI and data layer in one scope.",
-                tags: ["Fixed scope", "Full-stack", "Bolt to browser"],
+                tags: ["Fixed scope", "Full-stack", "New builds"],
               },
               {
                 num: "III",
@@ -375,72 +375,44 @@ export default function App() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* RETAINER */}
-      <section id="retainer" style={{ padding: "120px var(--pad)", background: "#f0ece4", borderTop: "1px solid var(--line)" }} className="section-pad">
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <Label>How engagements scale</Label>
-          <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(32px, 4.5vw, 52px)", lineHeight: 0.95, marginTop: "16px", letterSpacing: "-0.5px" }}>
-            The truss gets wider<br />as the partnership deepens.
-          </h2>
-          <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.85, marginTop: "20px", maxWidth: "560px", fontWeight: 300 }}>
-            Every engagement starts small and grows only as far as it needs to. No fixed pricing shown here —
-            the right tier depends on your operation. The span below is the shape of the commitment, not the cost.
-          </p>
+          {/* Retainer scale — belongs to "Fractional Plant Engineer" above, not a separate pitch */}
+          <div style={{ marginTop: "88px", paddingTop: "56px", borderTop: "1px solid var(--line)" }}>
+            <Label>How the retainer scales</Label>
+            <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.85, marginTop: "14px", maxWidth: "560px", fontWeight: 300 }}>
+              Engagements start small and grow only as far as the operation needs. No fixed pricing shown —
+              the visual below is the shape of the commitment, not the cost.
+            </p>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 40px", marginTop: "72px", alignItems: "end" }} className="three-col">
-            {[
-              {
-                tier: "Foundation",
-                cadence: "≈ 2 days / month",
-                panels: 3,
-                trussW: 160,
-                trussH: 22,
-                desc: "Preventive checks, system health monitoring, remote support on call.",
-              },
-              {
-                tier: "Active Partner",
-                cadence: "≈ 4–6 days / month",
-                panels: 5,
-                trussW: 240,
-                trussH: 34,
-                desc: "Above, plus active improvements, data analysis, CE documentation.",
-              },
-              {
-                tier: "Project Burst",
-                cadence: "Defined scope",
-                panels: 8,
-                trussW: 320,
-                trussH: 48,
-                desc: "Larger builds layered on top of the retainer — fixed scope, fixed price.",
-              },
-            ].map((t, i) => (
-              <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-                <Label style={{ color: "var(--orange)", marginBottom: "4px" }}>{`0${i + 1}`}</Label>
-                <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px", marginBottom: "6px" }}>{t.tier}</h3>
-                <Label style={{ marginBottom: "20px" }}>{t.cadence}</Label>
-
-                {/* the truss IS the chart — wider + taller + denser = more capacity */}
-                <div style={{ height: "56px", display: "flex", alignItems: "flex-end", marginBottom: "16px" }}>
-                  <TrussOnly width={t.trussW} height={t.trussH} panels={t.panels} color="#e03d00" opacity={0.5} />
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 40px", marginTop: "56px", alignItems: "end" }} className="three-col">
+              {[
+                { tier: "Foundation", cadence: "≈ 2 days / month", panels: 3, trussW: 160, trussH: 22,
+                  desc: "Preventive checks, system health monitoring, remote support on call." },
+                { tier: "Active Partner", cadence: "≈ 4–6 days / month", panels: 5, trussW: 240, trussH: 34,
+                  desc: "Above, plus active improvements, data analysis, CE documentation." },
+                { tier: "Project Burst", cadence: "Defined scope", panels: 8, trussW: 320, trussH: 48,
+                  desc: "Larger builds layered on top — fixed scope, fixed price." },
+              ].map((t, i) => (
+                <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                  <Label style={{ color: "var(--orange)", marginBottom: "4px" }}>{`0${i + 1}`}</Label>
+                  <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px", marginBottom: "6px" }}>{t.tier}</h3>
+                  <Label style={{ marginBottom: "20px" }}>{t.cadence}</Label>
+                  <div style={{ height: "56px", display: "flex", alignItems: "flex-end", marginBottom: "16px" }}>
+                    <TrussOnly width={t.trussW} height={t.trussH} panels={t.panels} color="#e03d00" opacity={0.5} />
+                  </div>
+                  <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "var(--gray)", lineHeight: 1.8, fontWeight: 300, maxWidth: "260px" }}>{t.desc}</p>
                 </div>
+              ))}
+            </div>
 
-                <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "var(--gray)", lineHeight: 1.8, fontWeight: 300, maxWidth: "260px" }}>{t.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* baseline axis under the three truss charts, reinforcing "this is a scale, not a price list" */}
-          <div style={{ marginTop: "40px", paddingTop: "16px", borderTop: "1px solid var(--line)", display: "flex", justifyContent: "space-between" }}>
-            <Label>Less commitment</Label>
-            <Label style={{ color: "var(--orange)" }}>↑ scope · cadence · depth ↑</Label>
-            <Label>More commitment</Label>
+            <div style={{ marginTop: "40px", paddingTop: "16px", borderTop: "1px solid var(--line)", display: "flex", justifyContent: "space-between" }}>
+              <Label>Less commitment</Label>
+              <Label style={{ color: "var(--orange)" }}>↑ scope · cadence · depth ↑</Label>
+              <Label>More commitment</Label>
+            </div>
           </div>
         </div>
       </section>
-
 
       <section id="stack" style={{ padding: "120px var(--pad)", background: "#f0ece4", borderTop: "1px solid var(--line)" }} className="section-pad">
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
