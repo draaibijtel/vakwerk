@@ -460,7 +460,12 @@ export default function App() {
           </div>
 
           {/* Disciplines — the technical engine behind the three services above, not a separate pitch */}
-          <div style={{ marginTop: "88px", paddingTop: "56px", borderTop: "1px solid var(--line)" }}>
+          <div style={{
+            marginTop: "88px", paddingTop: "56px", borderTop: "1px solid var(--line)",
+            background: "#f0ece4",
+            marginLeft: "calc(-1 * var(--pad))", marginRight: "calc(-1 * var(--pad))",
+            paddingLeft: "var(--pad)", paddingRight: "var(--pad)", paddingBottom: "56px",
+          }}>
             <Label>Built from four disciplines</Label>
             <h3 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(24px, 3.2vw, 34px)", marginTop: "14px", letterSpacing: "-0.4px", lineHeight: 1.1 }}>
               From bolt to browser.
@@ -507,15 +512,13 @@ export default function App() {
                 Mechanical engineer with 20+ years of industrial experience and 3+ years operating as a freelance engineering partner — spanning mechanical design, PLC control, browser-based HMI development and time-series data infrastructure.
               </p>
               <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "var(--gray)", lineHeight: 1.9, fontWeight: 300, marginTop: "20px" }}>
-                That combination — mechanical, PLC, web, data — is rare enough that most companies assemble it across three or four people. Vakwerk started as one engineer covering the full span, and is built to grow into a small network of senior partners working the same way.
+                Vakwerk began as one engineer able to cover that much ground alone — and is built to grow into a small network of senior partners who work the same way, each accountable end-to-end rather than handed off between specialists.
               </p>
               <div style={{ marginTop: "32px", paddingTop: "32px", borderTop: "1px solid var(--line)" }}>
-                <Label>Disciplines</Label>
-                <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "12px" }}>
-                  {["Mechanical Design", "Allen Bradley", "Beckhoff TwinCAT", "React / Node.js", "InfluxDB", "ISO 12100", "EN 13849"].map(t => (
-                    <span key={t} style={{ fontFamily: "var(--mono)", fontSize: "10.5px", letterSpacing: "1px", textTransform: "uppercase", color: "var(--gray)", border: "1px solid var(--line)", padding: "5px 11px" }}>{t}</span>
-                  ))}
-                </div>
+                <Label>Background</Label>
+                <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "var(--gray)", lineHeight: 1.9, marginTop: "10px", fontWeight: 300 }}>
+                  Dutch roots, based in Germany. Fluent in Deutsch, English and Nederlands — moves between German Mittelstand culture and international engineering standards without friction.
+                </p>
               </div>
             </div>
           </div>
