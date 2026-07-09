@@ -276,8 +276,7 @@ export default function App() {
           <Label>How we work</Label>
           <div style={{ marginTop: "48px" }}>
             {[
-              "We don't send engineers. We solve problems.",
-              "We bring engineers. We take responsibility.",
+              <>We <span style={{ color: "var(--orange)" }}>bring</span> engineers. We <span style={{ color: "#3d7ea8" }}>take</span> responsibility.</>,
               "Your problem is ours until it's solved.",
             ].map((line, i) => (
               <div key={i}>
