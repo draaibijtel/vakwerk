@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@300;400&display=swap');
@@ -103,39 +103,73 @@ const css = `
   ::-webkit-scrollbar-thumb { background: var(--orange); }
 `;
 
-function TrussSVG({ panels = 6, height = 32, color = "#e03d00", opacity = 0.3 }) {
+function VakwerkLogo({ width = 640, dark = false, showTagline = false, panels = 6, color = "#e03d00", opacity = 0.35 }) {
+  const W = 1000, textY = 210, trussTop = 250, trussH = 70;
+  const insetLeft = 20, insetRight = 90; // calibrated to Space Grotesk Bold "V"/"K" ink edges
+  const H = showTagline ? 340 : trussTop + trussH + 10;
+  const black = dark ? "#f6f3ee" : "#090807";
+  const gray  = dark ? "#6b6860" : "#9a9590";
+
+  const trussX0 = insetLeft, trussX1 = W - insetRight;
+  const span = trussX1 - trussX0;
+  const pw = span / panels;
+  const lines = [];
+  lines.push(<line key="bc" x1={trussX0} y1={trussTop + trussH} x2={trussX1} y2={trussTop + trussH} strokeWidth={5} />);
+  lines.push(<line key="tc" x1={trussX0 + pw} y1={trussTop} x2={trussX1 - pw} y2={trussTop} strokeWidth={5} />);
+  lines.push(<line key="lep" x1={trussX0} y1={trussTop + trussH} x2={trussX0 + pw} y2={trussTop} strokeWidth={5} />);
+  lines.push(<line key="rep" x1={trussX1 - pw} y1={trussTop} x2={trussX1} y2={trussTop + trussH} strokeWidth={5} />);
+  for (let i = 1; i < panels; i++) {
+    const x = trussX0 + i * pw;
+    lines.push(<line key={`v${i}`} x1={x} y1={trussTop} x2={x} y2={trussTop + trussH} strokeWidth={3} />);
+  }
+  for (let i = 1; i < panels - 1; i++) {
+    const xa = trussX0 + i * pw, xb = trussX0 + (i + 1) * pw;
+    if (i % 2 === 1) lines.push(<line key={`d${i}`} x1={xa} y1={trussTop} x2={xb} y2={trussTop + trussH} strokeWidth={3} />);
+    else lines.push(<line key={`d${i}`} x1={xa} y1={trussTop + trussH} x2={xb} y2={trussTop} strokeWidth={3} />);
+  }
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} style={{ width, display: "block" }}>
+      <text x={0} y={textY} fontFamily="'Space Grotesk', sans-serif" fontWeight={700} fontSize={200}
+        textLength={W} lengthAdjust="spacingAndGlyphs">
+        <tspan fill={black}>VAK</tspan>
+        <tspan fill="#e03d00">W</tspan>
+        <tspan fill={black}>ERK</tspan>
+      </text>
+      <g stroke={color} strokeLinecap="round" strokeLinejoin="round" opacity={opacity}>{lines}</g>
+      {showTagline && (
+        <text x={0} y={H - 8} fontFamily="'DM Mono', monospace" fontWeight={300} fontSize={20} letterSpacing={3} fill={gray}>
+          FRACTIONAL ENGINEERING PARTNERS
+        </text>
+      )}
+    </svg>
+  );
+}
+}
+
+function TrussOnly({ width = 300, height = 40, panels = 6, color = "#e03d00", opacity = 0.3 }) {
   const W = 1000;
   const pw = W / panels;
   const lines = [];
-  // bottom chord — full width
-  lines.push(<line key="bc" x1={0} y1={height} x2={W} y2={height} strokeWidth={1.8} />);
-  // top chord — shortened between first and last node (triangular ends)
-  lines.push(<line key="tc" x1={pw} y1={0} x2={(panels - 1) * pw} y2={0} strokeWidth={1.8} />);
-  // inclined end posts
-  lines.push(<line key="lep" x1={0} y1={height} x2={pw} y2={0} strokeWidth={1.8} />);
-  lines.push(<line key="rep" x1={(panels - 1) * pw} y1={0} x2={W} y2={height} strokeWidth={1.8} />);
-  // interior verticals
+  lines.push(<line key="bc" x1={0} y1={height} x2={W} y2={height} strokeWidth={5} />);
+  lines.push(<line key="tc" x1={pw} y1={0} x2={(panels - 1) * pw} y2={0} strokeWidth={5} />);
+  lines.push(<line key="lep" x1={0} y1={height} x2={pw} y2={0} strokeWidth={5} />);
+  lines.push(<line key="rep" x1={(panels - 1) * pw} y1={0} x2={W} y2={height} strokeWidth={5} />);
   for (let i = 1; i < panels; i++) {
-    lines.push(<line key={`v${i}`} x1={i * pw} y1={0} x2={i * pw} y2={height} strokeWidth={1} />);
+    lines.push(<line key={`v${i}`} x1={i * pw} y1={0} x2={i * pw} y2={height} strokeWidth={3} />);
   }
-  // interior diagonals — Warren style
   for (let i = 1; i < panels - 1; i++) {
-    if (i % 2 === 1) {
-      lines.push(<line key={`d${i}`} x1={i * pw} y1={0} x2={(i + 1) * pw} y2={height} strokeWidth={1} />);
-    } else {
-      lines.push(<line key={`d${i}`} x1={i * pw} y1={height} x2={(i + 1) * pw} y2={0} strokeWidth={1} />);
-    }
+    if (i % 2 === 1) lines.push(<line key={`d${i}`} x1={i * pw} y1={0} x2={(i + 1) * pw} y2={height} strokeWidth={3} />);
+    else lines.push(<line key={`d${i}`} x1={i * pw} y1={height} x2={(i + 1) * pw} y2={0} strokeWidth={3} />);
   }
   return (
     <svg viewBox={`0 0 ${W} ${height}`} preserveAspectRatio="none" fill="none"
-      style={{ width: "100%", height, display: "block" }}
+      style={{ width, height, display: "block" }}
       stroke={color} strokeLinecap="round" strokeLinejoin="round" opacity={opacity}>
       {lines}
     </svg>
   );
 }
-
-const Label = ({ children, style = {} }) => (
   <span style={{ fontFamily: "var(--mono)", fontSize: "11.5px", color: "var(--gray)", letterSpacing: "2px", textTransform: "uppercase", ...style }}>
     {children}
   </span>
@@ -147,21 +181,6 @@ const Rule = ({ style = {} }) => (
 
 export default function App() {
   const [hovered, setHovered] = useState(null);
-  const wordmarkRef = useRef(null);
-  const [wordmarkWidth, setWordmarkWidth] = useState(null);
-
-  useEffect(() => {
-    const measure = () => {
-      if (wordmarkRef.current) {
-        setWordmarkWidth(wordmarkRef.current.getBoundingClientRect().width);
-      }
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    // re-measure after fonts load (Space Grotesk may load async and shift width)
-    document.fonts?.ready?.then(measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
 
   return (
     <div style={{ background: "var(--white)", color: "var(--black)", fontFamily: "var(--display)", overflowX: "hidden" }}>
@@ -200,19 +219,8 @@ export default function App() {
         </div>
 
         <div style={{ padding: "32px var(--pad) 0", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <div style={{ display: "inline-block", alignSelf: "flex-start" }}>
-            <h1 ref={wordmarkRef} className="f2 hero-word" style={{
-              fontFamily: "var(--display)", fontWeight: 700,
-              fontSize: "clamp(72px, 12vw, 148px)",
-              lineHeight: 0.88, letterSpacing: "-3px", color: "var(--black)",
-              whiteSpace: "nowrap",
-            }}>
-              VAK<span style={{ color: "var(--orange)" }}>W</span>ERK
-            </h1>
-
-            <div className="f3" style={{ marginTop: "28px", width: wordmarkWidth ? `${wordmarkWidth}px` : "100%" }}>
-              <TrussSVG panels={6} height={32} color="#e03d00" opacity={0.35} />
-            </div>
+          <div className="f2" style={{ display: "inline-block" }}>
+            <VakwerkLogo width="min(680px, 88vw)" dark={false} panels={6} />
           </div>
 
           <p className="f4" style={{
@@ -329,7 +337,7 @@ export default function App() {
               </h2>
             </div>
             <div style={{ width: "280px", opacity: 0.15 }}>
-              <TrussSVG panels={6} height={32} color="#090807" opacity={1} />
+              <TrussOnly width={280} height={32} panels={6} color="#090807" opacity={1} />
             </div>
           </div>
 
@@ -448,7 +456,7 @@ export default function App() {
             </a>
           </div>
           <div style={{ marginTop: "80px", paddingTop: "48px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-            <TrussSVG panels={6} height={32} color="#f6f3ee" opacity={0.07} />
+            <TrussOnly width={520} height={32} panels={6} color="#f6f3ee" opacity={0.07} />
           </div>
         </div>
       </section>
