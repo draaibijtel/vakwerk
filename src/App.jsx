@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@300;400&display=swap');
@@ -147,6 +147,21 @@ const Rule = ({ style = {} }) => (
 
 export default function App() {
   const [hovered, setHovered] = useState(null);
+  const wordmarkRef = useRef(null);
+  const [wordmarkWidth, setWordmarkWidth] = useState(null);
+
+  useEffect(() => {
+    const measure = () => {
+      if (wordmarkRef.current) {
+        setWordmarkWidth(wordmarkRef.current.getBoundingClientRect().width);
+      }
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    // re-measure after fonts load (Space Grotesk may load async and shift width)
+    document.fonts?.ready?.then(measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   return (
     <div style={{ background: "var(--white)", color: "var(--black)", fontFamily: "var(--display)", overflowX: "hidden" }}>
@@ -185,8 +200,8 @@ export default function App() {
         </div>
 
         <div style={{ padding: "32px var(--pad) 0", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <div style={{ display: "inline-block", alignSelf: "flex-start" }}>
-            <h1 className="f2 hero-word" style={{
+          <div style={{ display: "inline-block" }}>
+            <h1 ref={wordmarkRef} className="f2 hero-word" style={{
               fontFamily: "var(--display)", fontWeight: 700,
               fontSize: "clamp(72px, 12vw, 148px)",
               lineHeight: 0.88, letterSpacing: "-3px", color: "var(--black)",
@@ -195,7 +210,7 @@ export default function App() {
               VAK<span style={{ color: "var(--orange)" }}>W</span>ERK
             </h1>
 
-            <div className="f3" style={{ marginTop: "28px" }}>
+            <div className="f3" style={{ marginTop: "28px", width: wordmarkWidth ? `${wordmarkWidth}px` : "100%" }}>
               <TrussSVG panels={6} height={32} color="#e03d00" opacity={0.35} />
             </div>
           </div>
