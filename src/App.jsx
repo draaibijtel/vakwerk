@@ -35,7 +35,7 @@ const css = `
 
   .nav-link {
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11.5px;
     color: var(--gray);
     text-decoration: none;
     letter-spacing: 1.5px;
@@ -185,7 +185,7 @@ export default function App() {
         </div>
 
         <div style={{ padding: "32px var(--pad) 0", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <div style={{ display: "inline-block" }}>
+          <div style={{ display: "inline-block", alignSelf: "flex-start" }}>
             <h1 className="f2 hero-word" style={{
               fontFamily: "var(--display)", fontWeight: 700,
               fontSize: "clamp(72px, 12vw, 148px)",
@@ -341,11 +341,11 @@ export default function App() {
             ].map((s, i) => (
               <div key={i} className="svc-card">
                 <Label style={{ color: "var(--orange)", fontSize: "11px", marginBottom: "20px", display: "block" }}>{s.num}</Label>
-                <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "19px", lineHeight: 1.2, letterSpacing: "-0.2px" }}>{s.title}</h3>
+                <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "21px", lineHeight: 1.2, letterSpacing: "-0.2px" }}>{s.title}</h3>
                 <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.85, marginTop: "16px", fontWeight: 300 }}>{s.body}</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "20px" }}>
                   {s.tags.map(t => (
-                    <span key={t} style={{ fontFamily: "var(--mono)", fontSize: "9px", letterSpacing: "1px", textTransform: "uppercase", color: "var(--gray)", border: "1px solid var(--line)", padding: "3px 8px" }}>{t}</span>
+                    <span key={t} style={{ fontFamily: "var(--mono)", fontSize: "10.5px", letterSpacing: "1px", textTransform: "uppercase", color: "var(--gray)", border: "1px solid var(--line)", padding: "4px 9px" }}>{t}</span>
                   ))}
                 </div>
               </div>
@@ -372,7 +372,7 @@ export default function App() {
                 <Label style={{ color: "var(--orange)", paddingTop: "2px" }}>{d.num}</Label>
                 <div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
-                    <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "18px" }}>{d.label}</h3>
+                    <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "19px" }}>{d.label}</h3>
                     <Label>{d.tags}</Label>
                   </div>
                   <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.8, marginTop: "8px", fontWeight: 300 }}>{d.desc}</p>
@@ -408,7 +408,7 @@ export default function App() {
                 <Label>Disciplines</Label>
                 <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "12px" }}>
                   {["Mechanical Design", "Allen Bradley", "Beckhoff TwinCAT", "React / Node.js", "InfluxDB", "ISO 12100", "EN 13849"].map(t => (
-                    <span key={t} style={{ fontFamily: "var(--mono)", fontSize: "9px", letterSpacing: "1px", textTransform: "uppercase", color: "var(--gray)", border: "1px solid var(--line)", padding: "4px 10px" }}>{t}</span>
+                    <span key={t} style={{ fontFamily: "var(--mono)", fontSize: "10.5px", letterSpacing: "1px", textTransform: "uppercase", color: "var(--gray)", border: "1px solid var(--line)", padding: "5px 11px" }}>{t}</span>
                   ))}
                 </div>
               </div>
