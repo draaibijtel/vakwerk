@@ -44,6 +44,23 @@ const css = `
   }
   .nav-link:hover { color: var(--black); }
 
+  .lang-btn {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 4px 8px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .lang-btn.active {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+  }
+
   .cta-btn {
     display: inline-flex;
     align-items: center;
@@ -105,7 +122,7 @@ const css = `
 
 function VakwerkLogo({ width = 640, dark = false, showTagline = false, panels = 6, color = "#e03d00", opacity = 0.35 }) {
   const W = 1000, textY = 210, trussTop = 250, trussH = 70;
-  const insetLeft = 20, insetRight = 90; // calibrated to Space Grotesk Bold "V"/"K" ink edges
+  const insetLeft = 20, insetRight = 90;
   const H = showTagline ? 340 : trussTop + trussH + 10;
   const black = dark ? "#f6f3ee" : "#090807";
   const gray  = dark ? "#6b6860" : "#9a9590";
@@ -155,16 +172,12 @@ function BrokenTruss({ width = 500, height = 44, panels = 3, gapFrac = 0.16, col
   const buildHalf = (x0, mirrored) => {
     const lines = [];
     const sign = mirrored ? -1 : 1;
-    // bottom chord for this half
     lines.push(<line key={`bc-${mirrored}`} x1={x0} y1={height} x2={x0 + sign * halfSpan} y2={height} strokeWidth={5} />);
-    // outer raker end (triangular), inner end cut straight (unfinished look)
     const outerX = mirrored ? x0 - halfSpan : x0 + halfSpan;
     const firstNodeX = mirrored ? x0 - pw : x0 + pw;
     lines.push(<line key={`tc-${mirrored}`} x1={firstNodeX} y1={0} x2={x0 + sign * (halfSpan - pw) + (mirrored ? pw * 0 : 0)} y2={0} strokeWidth={5} />);
     lines.push(<line key={`ep-${mirrored}`} x1={x0} y1={height} x2={firstNodeX} y2={0} strokeWidth={5} />);
-    // inner vertical (the "cut" edge, unfinished)
     lines.push(<line key={`cut-${mirrored}`} x1={outerX} y1={0} x2={outerX} y2={height} strokeWidth={5} strokeDasharray="6 6" opacity={0.6} />);
-    // interior verticals + diagonals
     for (let i = 1; i < panels; i++) {
       const x = x0 + sign * i * pw;
       lines.push(<line key={`v-${mirrored}-${i}`} x1={x} y1={0} x2={x} y2={height} strokeWidth={3} />);
@@ -222,8 +235,168 @@ const Rule = ({ style = {} }) => (
   <div style={{ height: "1px", background: "var(--line)", ...style }} />
 );
 
+// ── TRANSLATIONS ──────────────────────────────────────────────────────────
+const T = {
+  en: {
+    nav: { services: "Services", retainer: "Retainer", stack: "Stack", founder: "Founder", talk: "Let's talk" },
+    hero: {
+      tagline: "Fractional Engineering Partners",
+      subtext: "We solve industrial engineering problems for Small and Medium-sized Enterprises — mechanically, digitally, and at the pace your operation demands.",
+      ctaStart: "Start a conversation",
+      ctaServices: "See our services ↓",
+      stats: [["3+", "Years delivering"], ["4", "Disciplines. One partner."], ["0", "Bullshit tolerated."], ["∞", "Problems solvable."]],
+    },
+    problem: {
+      label: "The problem",
+      headline1: "Expertise: rare.",
+      headline2: "Access: rarer.",
+      headline3: "The bridge: missing.",
+      caption: "Two sides. No span between them. Yet.",
+      p1: "Mid-sized industrial companies run complex machines — but often can't justify a full-time senior engineer. They rely on machine builders who are long gone, or on knowledge that lives only in one person's head.",
+      p2: "Meanwhile, many experienced engineers want flexible, meaningful work — not tied to one employer, not reduced to hourly gigs. The expertise exists. The need exists. The connection doesn't.",
+      p3suffix: "is that bridge.",
+    },
+    manifesto: {
+      label: "How we work",
+      line1pre: "We ", line1mid1: "bring", line1mid2: " engineers. We ", line1mid3: "take", line1post: " responsibility.",
+      line2: "Your problem is ours until it's solved.",
+    },
+    services: {
+      label: "What we deliver",
+      headline1: "Engineering capacity",
+      headline2: "at the scale you need.",
+      cards: [
+        { num: "I", title: "Fractional Plant Engineer",
+          body: "Someone who knows your machines as well as you do. Health checks, small fixes before they become downtime, full visibility into what's actually happening on the floor — owned by us, not delegated.",
+          tags: ["Retainer-based", "Proactive", "Embedded"] },
+        { num: "II", title: "Fractional R&D Engineer",
+          body: "New machine concepts, test rigs, smart automation — from first sketch to a commissioned, working system. One point of contact, not three vendors to coordinate.",
+          tags: ["Fixed scope", "Full-stack", "New builds"] },
+        { num: "III", title: "CE & Documentation",
+          body: "Risk assessment, technical file, Betriebsanleitung and Declaration of Conformity. Part of every machine delivery, not an afterthought.",
+          tags: ["2006/42/EG", "ISO 12100", "Annex VII"] },
+      ],
+    },
+    retainer: {
+      label: "How the retainer scales",
+      headline1: "Every engagement starts small",
+      headline2: "and grows only as far as it needs to.",
+      tiers: [
+        { tier: "Foundation", cadence: "≈ 2 days / month", desc: "Preventive checks, system health monitoring, remote support on call." },
+        { tier: "Active Partner", cadence: "≈ 4–6 days / month", desc: "Everything in Foundation, plus active improvements, data analysis, CE documentation." },
+        { tier: "Project Burst", cadence: "Defined scope", desc: "Larger builds layered on top — fixed scope, fixed price." },
+      ],
+      less: "Less commitment", more: "More commitment", axis: "↑ scope · cadence · depth ↑",
+    },
+    stack: {
+      label: "Built from four disciplines",
+      headline: "From bolt to browser.",
+      items: [
+        { num: "01", label: "Mechanical Design", desc: "Mechanisms, fixtures, test rigs. Designed for manufacturability, built to last.", tags: "SolidWorks · FEA · GD&T · BOM" },
+        { num: "02", label: "PLC & Control", desc: "Deterministic machine logic. State machines, motion coordination, safety, fault handling.", tags: "Allen Bradley · Beckhoff · IEC 61131-3" },
+        { num: "03", label: "Browser HMI", desc: "No SCADA licences. Any device, any browser. Real-time data, alarms, user management.", tags: "React · WebSocket · REST · Node-RED" },
+        { num: "04", label: "Time-Series Data", desc: "Every cycle logged. OEE, torque curves, Pareto analysis, anomaly detection.", tags: "InfluxDB · Grafana · Flux · MQTT" },
+      ],
+    },
+    founder: {
+      label: "Founder",
+      available: "Available for new engagements",
+      p1: "Mechanical engineer with 20+ years of industrial experience and 3+ years operating as a freelance engineering partner — spanning mechanical design, PLC control, browser-based HMI development and time-series data infrastructure.",
+      p2: "Vakwerk began as one engineer able to cover that much ground alone — and is built to grow into a small network of senior partners who work the same way, each accountable end-to-end rather than handed off between specialists.",
+      bgLabel: "Background",
+      bg: "Dutch roots, based in Germany. Fluent in Deutsch, English and Nederlands — moves between German SME culture and international engineering standards without friction.",
+    },
+    contact: {
+      label: "Get in touch",
+      headline1: "Got a problem",
+      headline2: "worth solving",
+      p: "We work with a small number of clients at any time. If that's a fit, let's have a direct conversation.",
+    },
+    footer: { tag: "Engineering Partners · Germany" },
+  },
+  de: {
+    nav: { services: "Leistungen", retainer: "Retainer", stack: "Disziplinen", founder: "Gründer", talk: "Kontakt" },
+    hero: {
+      tagline: "Fractional Engineering Partners",
+      subtext: "Wir lösen industrielle Engineering-Probleme für kleine und mittlere Unternehmen — mechanisch, digital und im Tempo, das Ihr Betrieb braucht.",
+      ctaStart: "Gespräch beginnen",
+      ctaServices: "Unsere Leistungen ↓",
+      stats: [["3+", "Jahre im Einsatz"], ["4", "Disziplinen. Ein Partner."], ["0", "Bullshit tolerated."], ["∞", "Probleme lösbar."]],
+    },
+    problem: {
+      label: "Das Problem",
+      headline1: "Expertise: selten.",
+      headline2: "Zugang: seltener.",
+      headline3: "Die Brücke: fehlt.",
+      caption: "Zwei Seiten. Noch keine Verbindung dazwischen.",
+      p1: "Mittelständische Industrieunternehmen betreiben komplexe Maschinen — können sich aber oft keinen leitenden Ingenieur in Vollzeit leisten. Sie verlassen sich auf Maschinenbauer, die längst nicht mehr da sind, oder auf Wissen, das nur im Kopf einer einzigen Person existiert.",
+      p2: "Viele erfahrene Ingenieure wünschen sich zugleich flexible, sinnstiftende Arbeit — nicht an einen Arbeitgeber gebunden, nicht auf Stundenlohn reduziert. Die Expertise existiert. Der Bedarf existiert. Die Verbindung fehlt.",
+      p3suffix: "ist diese Brücke.",
+    },
+    manifesto: {
+      label: "Wie wir arbeiten",
+      line1pre: "Wir ", line1mid1: "bringen", line1mid2: " Ingenieure. Wir ", line1mid3: "übernehmen", line1post: " Verantwortung.",
+      line2: "Ihr Problem ist unseres, bis es gelöst ist.",
+    },
+    services: {
+      label: "Was wir liefern",
+      headline1: "Engineering-Kapazität",
+      headline2: "im Maßstab, den Sie brauchen.",
+      cards: [
+        { num: "I", title: "Fractional Plant Engineer",
+          body: "Jemand, der Ihre Maschinen so gut kennt wie Sie selbst. Gesundheitschecks, kleine Reparaturen bevor sie zum Stillstand werden, volle Transparenz über das, was auf dem Hallenboden wirklich passiert — von uns verantwortet, nicht delegiert.",
+          tags: ["Retainer-basiert", "Proaktiv", "Eingebunden"] },
+        { num: "II", title: "Fractional R&D Engineer",
+          body: "Neue Maschinenkonzepte, Prüfstände, smarte Automatisierung — von der ersten Skizze bis zum abgenommenen, laufenden System. Ein Ansprechpartner, keine drei Lieferanten zum Koordinieren.",
+          tags: ["Fester Umfang", "Full-Stack", "Neuentwicklungen"] },
+        { num: "III", title: "CE & Dokumentation",
+          body: "Risikobeurteilung, technische Dokumentation, Betriebsanleitung und Konformitätserklärung. Teil jeder Maschinenlieferung, kein nachträglicher Gedanke.",
+          tags: ["2006/42/EG", "ISO 12100", "Anhang VII"] },
+      ],
+    },
+    retainer: {
+      label: "Wie der Retainer skaliert",
+      headline1: "Jedes Engagement beginnt klein",
+      headline2: "und wächst nur so weit, wie nötig.",
+      tiers: [
+        { tier: "Foundation", cadence: "≈ 2 Tage / Monat", desc: "Präventive Checks, Systemüberwachung, Remote-Support auf Abruf." },
+        { tier: "Active Partner", cadence: "≈ 4–6 Tage / Monat", desc: "Alles aus Foundation, plus aktive Verbesserungen, Datenanalyse, CE-Dokumentation." },
+        { tier: "Project Burst", cadence: "Definierter Umfang", desc: "Größere Projekte obendrauf — fester Umfang, fester Preis." },
+      ],
+      less: "Weniger Bindung", more: "Mehr Bindung", axis: "↑ Umfang · Takt · Tiefe ↑",
+    },
+    stack: {
+      label: "Aus vier Disziplinen aufgebaut",
+      headline: "Von der Schraube bis zum Browser.",
+      items: [
+        { num: "01", label: "Mechanik-Konstruktion", desc: "Mechanismen, Vorrichtungen, Prüfstände. Gestaltet für Fertigbarkeit, gebaut für die Dauer.", tags: "SolidWorks · FEA · GD&T · BOM" },
+        { num: "02", label: "SPS & Steuerung", desc: "Deterministische Maschinenlogik. Zustandsautomaten, Bewegungskoordination, Sicherheit, Fehlerbehandlung.", tags: "Allen Bradley · Beckhoff · IEC 61131-3" },
+        { num: "03", label: "Browser-HMI", desc: "Keine SCADA-Lizenzen. Jedes Gerät, jeder Browser. Echtzeitdaten, Alarme, Benutzerverwaltung.", tags: "React · WebSocket · REST · Node-RED" },
+        { num: "04", label: "Zeitreihendaten", desc: "Jeder Zyklus protokolliert. OEE, Drehmomentkurven, Pareto-Analyse, Anomalieerkennung.", tags: "InfluxDB · Grafana · Flux · MQTT" },
+      ],
+    },
+    founder: {
+      label: "Gründer",
+      available: "Verfügbar für neue Engagements",
+      p1: "Maschinenbauingenieur mit über 20 Jahren Industrieerfahrung und mehr als 3 Jahren als freiberuflicher Engineering-Partner — von Mechanik-Konstruktion über SPS-Steuerung bis zu browserbasierter HMI-Entwicklung und Zeitreihendaten-Infrastruktur.",
+      p2: "Vakwerk begann als ein einzelner Ingenieur, der diese Bandbreite allein abdecken konnte — und ist darauf ausgelegt, zu einem kleinen Netzwerk erfahrener Partner zu wachsen, die auf dieselbe Weise arbeiten: jeder verantwortlich von Anfang bis Ende, statt zwischen Spezialisten hin- und hergereicht.",
+      bgLabel: "Hintergrund",
+      bg: "Niederländische Wurzeln, ansässig in Deutschland. Fließend in Deutsch, Englisch und Niederländisch — bewegt sich reibungslos zwischen deutscher Mittelstandskultur und internationalen Engineering-Standards.",
+    },
+    contact: {
+      label: "Kontakt aufnehmen",
+      headline1: "Ein Problem,",
+      headline2: "das es wert ist",
+      p: "Wir arbeiten zu jeder Zeit nur mit einer kleinen Anzahl an Kunden. Wenn das passt, lassen Sie uns direkt sprechen.",
+    },
+    footer: { tag: "Engineering Partners · Deutschland" },
+  },
+};
+
 export default function App() {
   const [hovered, setHovered] = useState(null);
+  const [lang, setLang] = useState("en");
+  const t = T[lang];
 
   return (
     <div style={{ background: "var(--white)", color: "var(--black)", fontFamily: "var(--display)", overflowX: "hidden" }}>
@@ -242,15 +415,19 @@ export default function App() {
             Vakwerk<span style={{ color: "var(--orange)" }}>.</span>
           </span>
         </a>
-        <div className="nav-links" style={{ display: "flex", gap: "36px", alignItems: "center" }}>
-          {[["#services", "Services"], ["#retainer", "Retainer"], ["#stack", "Stack"], ["#founder", "Founder"]].map(([href, label]) => (
+        <div className="nav-links" style={{ display: "flex", gap: "28px", alignItems: "center" }}>
+          {[["#services", t.nav.services], ["#retainer", t.nav.retainer], ["#stack", t.nav.stack], ["#founder", t.nav.founder]].map(([href, label]) => (
             <a key={href} href={href} className="nav-link">{label}</a>
           ))}
           <a href="#contact" style={{
             fontFamily: "var(--mono)", fontSize: "10px", letterSpacing: "1.5px",
             textTransform: "uppercase", color: "var(--orange)", textDecoration: "none",
             borderBottom: "1px solid var(--orange)", paddingBottom: "1px",
-          }}>Let's talk</a>
+          }}>{t.nav.talk}</a>
+          <div style={{ display: "flex", gap: "4px", marginLeft: "8px" }}>
+            <button className={`lang-btn ${lang === "en" ? "active" : ""}`} onClick={() => setLang("en")}>EN</button>
+            <button className={`lang-btn ${lang === "de" ? "active" : ""}`} onClick={() => setLang("de")}>DE</button>
+          </div>
         </div>
       </nav>
 
@@ -258,7 +435,7 @@ export default function App() {
       <section id="top" style={{ paddingTop: "52px", minHeight: "92vh", display: "flex", flexDirection: "column" }}>
         <div style={{ padding: "20px var(--pad) 0", display: "flex", alignItems: "center", gap: "20px" }}>
           <div style={{ height: "1px", flex: 1, background: "var(--orange)", transformOrigin: "left", animation: "drawLine 0.9s ease both 0.1s" }} />
-          <Label className="f1">Fractional Engineering Partners</Label>
+          <Label className="f1">{t.hero.tagline}</Label>
         </div>
 
         <div style={{ padding: "12px var(--pad) 0", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
@@ -270,30 +447,24 @@ export default function App() {
             fontFamily: "var(--display)", fontWeight: 300, fontSize: "18px",
             color: "var(--gray)", marginTop: "32px", maxWidth: "500px", lineHeight: 1.6,
           }}>
-            We solve industrial engineering problems for Small and Medium-sized Enterprises —
-            mechanically, digitally, and at the pace your operation demands.
+            {t.hero.subtext}
           </p>
 
           <div className="f5" style={{ display: "flex", gap: "24px", marginTop: "40px", alignItems: "center", flexWrap: "wrap" }}>
-            <a href="#contact" className="cta-btn">Start a conversation</a>
+            <a href="#contact" className="cta-btn">{t.hero.ctaStart}</a>
             <a href="#services" style={{
               fontFamily: "var(--mono)", fontSize: "10px", color: "var(--gray)",
               letterSpacing: "1.5px", textTransform: "uppercase", textDecoration: "none", transition: "color 0.2s",
             }}
               onMouseEnter={e => e.target.style.color = "var(--black)"}
               onMouseLeave={e => e.target.style.color = "var(--gray)"}
-            >See our services ↓</a>
+            >{t.hero.ctaServices}</a>
           </div>
         </div>
 
         <div style={{ borderTop: "1px solid var(--line)", marginTop: "28px" }}>
           <div style={{ padding: "0 var(--pad)", display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }} className="four-col">
-            {[
-              ["3+", "Years delivering"],
-              ["4",  "Disciplines. One partner."],
-              ["0",  "Bullshit tolerated."],
-              ["∞",  "Problems solvable."],
-            ].map(([val, label], i) => (
+            {t.hero.stats.map(([val, label], i) => (
               <div key={i} style={{
                 padding: "24px 0",
                 borderRight: i < 3 ? "1px solid var(--line)" : "none",
@@ -313,32 +484,31 @@ export default function App() {
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }} className="two-col">
             <div>
-              <Label style={{ color: "#6b6860" }}>The problem</Label>
+              <Label style={{ color: "#6b6860" }}>{t.problem.label}</Label>
               <h2 className="problem-head" style={{
                 fontFamily: "var(--display)", fontWeight: 700,
                 fontSize: "clamp(32px, 4vw, 48px)", color: "#f6f3ee",
                 lineHeight: 1.15, marginTop: "20px", letterSpacing: "-0.5px",
               }}>
-                Expertise: rare.<br />
-                Access: rarer.<br />
-                <span style={{ color: "var(--orange)" }}>The bridge: missing.</span>
+                {t.problem.headline1}<br />
+                {t.problem.headline2}<br />
+                <span style={{ color: "var(--orange)" }}>{t.problem.headline3}</span>
               </h2>
 
-              {/* the graph: a truss with the middle deliberately unbuilt */}
               <div style={{ marginTop: "36px" }}>
                 <BrokenTruss width={340} height={30} panels={3} gapFrac={0.18} color="#e03d00" opacity={0.55} />
               </div>
-              <Label style={{ marginTop: "10px", display: "block", color: "#4a453d" }}>Two sides. No span between them. Yet.</Label>
+              <Label style={{ marginTop: "10px", display: "block", color: "#4a453d" }}>{t.problem.caption}</Label>
             </div>
             <div style={{ paddingTop: "4px" }}>
               <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "#6b6860", lineHeight: 1.7, fontWeight: 300 }}>
-                Mid-sized industrial companies run complex machines — but often can't justify a full-time senior engineer. They rely on machine builders who are long gone, or on knowledge that lives only in one person's head.
+                {t.problem.p1}
               </p>
               <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "#6b6860", lineHeight: 1.7, fontWeight: 300, marginTop: "20px" }}>
-                Meanwhile, many experienced engineers want flexible, meaningful work — not tied to one employer, not reduced to hourly gigs. The expertise exists. The need exists. The connection doesn't.
+                {t.problem.p2}
               </p>
               <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "#f6f3ee", lineHeight: 1.7, fontWeight: 400, marginTop: "20px" }}>
-                <span style={{ color: "var(--orange)", fontWeight: 700 }}>Vakwerk</span> is that bridge.
+                <span style={{ color: "var(--orange)", fontWeight: 700 }}>Vakwerk</span> {t.problem.p3suffix}
               </p>
             </div>
           </div>
@@ -348,11 +518,11 @@ export default function App() {
       {/* MANIFESTO */}
       <section style={{ padding: "120px var(--pad)", borderBottom: "1px solid var(--line)" }} className="section-pad">
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <Label>How we work</Label>
+          <Label>{t.manifesto.label}</Label>
           <div style={{ marginTop: "56px", display: "flex", flexDirection: "column", gap: "40px" }}>
             {[
-              <>We <span style={{ color: "var(--orange)" }}>bring</span> engineers. We <span style={{ color: "#3d7ea8" }}>take</span> responsibility.</>,
-              "Your problem is ours until it's solved.",
+              <>{t.manifesto.line1pre}<span style={{ color: "var(--orange)" }}>{t.manifesto.line1mid1}</span>{t.manifesto.line1mid2}<span style={{ color: "#3d7ea8" }}>{t.manifesto.line1mid3}</span>{t.manifesto.line1post}</>,
+              t.manifesto.line2,
             ].map((line, i) => (
               <p key={i} className="manifesto-text" style={{
                 fontFamily: "var(--display)", fontWeight: 600,
@@ -376,9 +546,9 @@ export default function App() {
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "64px", flexWrap: "wrap", gap: "24px" }}>
             <div>
-              <Label>What we deliver</Label>
+              <Label>{t.services.label}</Label>
               <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(36px, 5vw, 56px)", lineHeight: 0.95, marginTop: "16px", letterSpacing: "-0.5px" }}>
-                Engineering capacity<br />at the scale you need.
+                {t.services.headline1}<br />{t.services.headline2}
               </h2>
             </div>
             <div style={{ width: "280px", opacity: 0.15 }}>
@@ -387,33 +557,14 @@ export default function App() {
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 48px" }} className="three-col">
-            {[
-              {
-                num: "I",
-                title: "Fractional Plant Engineer",
-                body: "Someone who knows your machines as well as you do. Health checks, small fixes before they become downtime, full visibility into what's actually happening on the floor — owned by us, not delegated.",
-                tags: ["Retainer-based", "Proactive", "Embedded"],
-              },
-              {
-                num: "II",
-                title: "Fractional R&D Engineer",
-                body: "New machine concepts, test rigs, smart automation — from first sketch to a commissioned, working system. One point of contact, not three vendors to coordinate.",
-                tags: ["Fixed scope", "Full-stack", "New builds"],
-              },
-              {
-                num: "III",
-                title: "CE & Documentation",
-                body: "Risk assessment, technical file, Betriebsanleitung and Declaration of Conformity. Part of every machine delivery, not an afterthought.",
-                tags: ["2006/42/EG", "ISO 12100", "Annex VII"],
-              },
-            ].map((s, i) => (
+            {t.services.cards.map((s, i) => (
               <div key={i} className="svc-card">
                 <Label style={{ color: "var(--orange)", marginBottom: "20px", display: "block" }}>{s.num}</Label>
                 <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "22px", lineHeight: 1.2, letterSpacing: "-0.2px" }}>{s.title}</h3>
                 <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.7, marginTop: "16px", fontWeight: 300 }}>{s.body}</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "20px" }}>
-                  {s.tags.map(t => (
-                    <span key={t} style={{ fontFamily: "var(--mono)", fontSize: "10.5px", letterSpacing: "1px", textTransform: "uppercase", color: "var(--gray)", border: "1px solid var(--line)", padding: "4px 9px" }}>{t}</span>
+                  {s.tags.map(tag => (
+                    <span key={tag} style={{ fontFamily: "var(--mono)", fontSize: "10.5px", letterSpacing: "1px", textTransform: "uppercase", color: "var(--gray)", border: "1px solid var(--line)", padding: "4px 9px" }}>{tag}</span>
                   ))}
                 </div>
               </div>
@@ -422,57 +573,49 @@ export default function App() {
         </div>
       </section>
 
-      {/* RETAINER — its own section: applies to all three services above, not just one */}
+      {/* RETAINER */}
       <section id="retainer" style={{ padding: "120px var(--pad)", background: "#f0ece4", borderTop: "1px solid var(--line)" }} className="section-pad">
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <Label>How the retainer scales</Label>
+          <Label>{t.retainer.label}</Label>
           <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(32px, 4.5vw, 48px)", lineHeight: 1, marginTop: "16px", letterSpacing: "-0.5px" }}>
-            Every engagement starts small<br />and grows only as far as it needs to.
+            {t.retainer.headline1}<br />{t.retainer.headline2}
           </h2>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 40px", marginTop: "64px", alignItems: "start" }} className="three-col">
-            {[
-              { tier: "Foundation", cadence: "≈ 2 days / month", panels: 3, trussW: 160, trussH: 22,
-                desc: "Preventive checks, system health monitoring, remote support on call." },
-              { tier: "Active Partner", cadence: "≈ 4–6 days / month", panels: 5, trussW: 240, trussH: 34,
-                desc: "Everything in Foundation, plus active improvements, data analysis, CE documentation." },
-              { tier: "Project Burst", cadence: "Defined scope", panels: 8, trussW: 320, trussH: 48,
-                desc: "Larger builds layered on top — fixed scope, fixed price." },
-            ].map((t, i) => (
-              <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-                <Label style={{ color: "var(--orange)", marginBottom: "4px" }}>{`0${i + 1}`}</Label>
-                <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "22px", marginBottom: "6px" }}>{t.tier}</h3>
-                <Label style={{ marginBottom: "20px" }}>{t.cadence}</Label>
-                <div style={{ height: "56px", display: "flex", alignItems: "flex-end", marginBottom: "16px" }}>
-                  <TrussOnly width={t.trussW} height={t.trussH} panels={t.panels} color="#e03d00" opacity={0.5} />
+            {t.retainer.tiers.map((tier, i) => {
+              const trussSpecs = [{ panels: 3, trussW: 160, trussH: 22 }, { panels: 5, trussW: 240, trussH: 34 }, { panels: 8, trussW: 320, trussH: 48 }];
+              const spec = trussSpecs[i];
+              return (
+                <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                  <Label style={{ color: "var(--orange)", marginBottom: "4px" }}>{`0${i + 1}`}</Label>
+                  <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "22px", marginBottom: "6px" }}>{tier.tier}</h3>
+                  <Label style={{ marginBottom: "20px" }}>{tier.cadence}</Label>
+                  <div style={{ height: "56px", display: "flex", alignItems: "flex-end", marginBottom: "16px" }}>
+                    <TrussOnly width={spec.trussW} height={spec.trussH} panels={spec.panels} color="#e03d00" opacity={0.5} />
+                  </div>
+                  <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.6, fontWeight: 300, maxWidth: "260px" }}>{tier.desc}</p>
                 </div>
-                <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.6, fontWeight: 300, maxWidth: "260px" }}>{t.desc}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div style={{ marginTop: "48px", paddingTop: "16px", borderTop: "1px solid rgba(9,8,7,0.12)", display: "flex", justifyContent: "space-between" }}>
-            <Label>Less commitment</Label>
-            <Label style={{ color: "var(--orange)" }}>↑ scope · cadence · depth ↑</Label>
-            <Label>More commitment</Label>
+            <Label>{t.retainer.less}</Label>
+            <Label style={{ color: "var(--orange)" }}>{t.retainer.axis}</Label>
+            <Label>{t.retainer.more}</Label>
           </div>
         </div>
       </section>
 
-      {/* DISCIPLINES — its own section: the technical engine behind the three services above */}
+      {/* DISCIPLINES */}
       <section id="stack" style={{ padding: "120px var(--pad)", borderTop: "1px solid var(--line)" }} className="section-pad">
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <Label>Built from four disciplines</Label>
+          <Label>{t.stack.label}</Label>
           <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(32px, 4.5vw, 50px)", marginTop: "16px", letterSpacing: "-0.5px", lineHeight: 1 }}>
-            From bolt to browser.
+            {t.stack.headline}
           </h2>
           <div style={{ marginTop: "56px" }}>
-            {[
-              { num: "01", label: "Mechanical Design", desc: "Mechanisms, fixtures, test rigs. Designed for manufacturability, built to last.", tags: "SolidWorks · FEA · GD&T · BOM" },
-              { num: "02", label: "PLC & Control", desc: "Deterministic machine logic. State machines, motion coordination, safety, fault handling.", tags: "Allen Bradley · Beckhoff · IEC 61131-3" },
-              { num: "03", label: "Browser HMI", desc: "No SCADA licences. Any device, any browser. Real-time data, alarms, user management.", tags: "React · WebSocket · REST · Node-RED" },
-              { num: "04", label: "Time-Series Data", desc: "Every cycle logged. OEE, torque curves, Pareto analysis, anomaly detection.", tags: "InfluxDB · Grafana · Flux · MQTT" },
-            ].map((d, i) => (
+            {t.stack.items.map((d, i) => (
               <div key={i} className="disc-item">
                 <Label style={{ color: "var(--orange)", paddingTop: "2px" }}>{d.num}</Label>
                 <div>
@@ -493,26 +636,26 @@ export default function App() {
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "80px", alignItems: "start" }} className="founder-grid two-col">
             <div>
-              <Label>Founder</Label>
+              <Label>{t.founder.label}</Label>
               <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "32px", marginTop: "16px", letterSpacing: "-0.3px", lineHeight: 1.1 }}>
                 Herman<br />de Jong
               </h2>
               <div style={{ marginTop: "20px", display: "inline-flex", alignItems: "center", gap: "8px", padding: "6px 12px", border: "1px solid var(--line)" }}>
                 <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#4a9a4a", display: "inline-block", flexShrink: 0 }} />
-                <Label>Available for new engagements</Label>
+                <Label>{t.founder.available}</Label>
               </div>
             </div>
             <div>
               <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.7, fontWeight: 300 }}>
-                Mechanical engineer with 20+ years of industrial experience and 3+ years operating as a freelance engineering partner — spanning mechanical design, PLC control, browser-based HMI development and time-series data infrastructure.
+                {t.founder.p1}
               </p>
               <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.7, fontWeight: 300, marginTop: "20px" }}>
-                Vakwerk began as one engineer able to cover that much ground alone — and is built to grow into a small network of senior partners who work the same way, each accountable end-to-end rather than handed off between specialists.
+                {t.founder.p2}
               </p>
               <div style={{ marginTop: "32px", paddingTop: "32px", borderTop: "1px solid var(--line)" }}>
-                <Label>Background</Label>
+                <Label>{t.founder.bgLabel}</Label>
                 <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.7, marginTop: "10px", fontWeight: 300 }}>
-                  Dutch roots, based in Germany. Fluent in Deutsch, English and Nederlands — moves between German SME culture and international engineering standards without friction.
+                  {t.founder.bg}
                 </p>
               </div>
             </div>
@@ -523,12 +666,12 @@ export default function App() {
       {/* CONTACT */}
       <section id="contact" style={{ padding: "120px var(--pad)", background: "var(--black)" }} className="section-pad">
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <Label style={{ color: "#6b6860" }}>Get in touch</Label>
+          <Label style={{ color: "#6b6860" }}>{t.contact.label}</Label>
           <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(36px, 6vw, 70px)", color: "#f6f3ee", lineHeight: 0.95, marginTop: "20px", letterSpacing: "-1px" }}>
-            Got a problem<br />worth solving<span style={{ color: "var(--orange)" }}>?</span>
+            {t.contact.headline1}<br />{t.contact.headline2}<span style={{ color: "var(--orange)" }}>?</span>
           </h2>
           <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "#6b6860", lineHeight: 1.7, marginTop: "32px", maxWidth: "440px", fontWeight: 300 }}>
-            We work with a small number of clients at any time. If that's a fit, let's have a direct conversation.
+            {t.contact.p}
           </p>
           <div style={{ marginTop: "48px" }}>
             <a href="mailto:info@hermandejong.de" className="cta-btn">
@@ -547,7 +690,7 @@ export default function App() {
           <span style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "15px", letterSpacing: "-0.2px" }}>
             Vakwerk<span style={{ color: "var(--orange)" }}>.</span>
           </span>
-          <Label>Engineering Partners · Germany</Label>
+          <Label>{t.footer.tag}</Label>
           <Label>© 2025 Herman de Jong</Label>
         </div>
       </footer>
