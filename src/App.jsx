@@ -69,13 +69,6 @@ const css = `
   }
   .svc-card:hover { border-top-color: var(--orange); }
 
-  .svc-card-dark {
-    border-top: 1px solid rgba(255,255,255,0.14);
-    padding: 32px 0;
-    transition: border-color 0.2s;
-  }
-  .svc-card-dark:hover { border-top-color: var(--orange); }
-
   .disc-item {
     padding: 24px 0;
     border-bottom: 1px solid var(--line);
@@ -219,36 +212,6 @@ function TrussOnly({ width = 300, height = 40, panels = 6, color = "#e03d00", op
   );
 }
 
-function GradientTruss({ width = 280, height = 32, panels = 6, opacity = 1, id = "svcTrussGrad" }) {
-  const W = 1000;
-  const pw = W / panels;
-  const lines = [];
-  lines.push(<line key="bc" x1={0} y1={height} x2={W} y2={height} strokeWidth={5} />);
-  lines.push(<line key="tc" x1={pw} y1={0} x2={(panels - 1) * pw} y2={0} strokeWidth={5} />);
-  lines.push(<line key="lep" x1={0} y1={height} x2={pw} y2={0} strokeWidth={5} />);
-  lines.push(<line key="rep" x1={(panels - 1) * pw} y1={0} x2={W} y2={height} strokeWidth={5} />);
-  for (let i = 1; i < panels; i++) {
-    lines.push(<line key={`v${i}`} x1={i * pw} y1={0} x2={i * pw} y2={height} strokeWidth={3} />);
-  }
-  for (let i = 1; i < panels - 1; i++) {
-    if (i % 2 === 1) lines.push(<line key={`d${i}`} x1={i * pw} y1={0} x2={(i + 1) * pw} y2={height} strokeWidth={3} />);
-    else lines.push(<line key={`d${i}`} x1={i * pw} y1={height} x2={(i + 1) * pw} y2={0} strokeWidth={3} />);
-  }
-  return (
-    <svg viewBox={`0 0 ${W} ${height}`} preserveAspectRatio="none" fill="none"
-      style={{ width, height, display: "block" }}
-      strokeLinecap="round" strokeLinejoin="round" opacity={opacity}>
-      <defs>
-        <linearGradient id={id} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#e03d00" />
-          <stop offset="100%" stopColor="#6b6860" />
-        </linearGradient>
-      </defs>
-      <g stroke={`url(#${id})`}>{lines}</g>
-    </svg>
-  );
-}
-
 const Label = ({ children, style = {} }) => (
   <span style={{ fontFamily: "var(--mono)", fontSize: "11.5px", color: "var(--gray)", letterSpacing: "2px", textTransform: "uppercase", ...style }}>
     {children}
@@ -375,7 +338,7 @@ export default function App() {
                 Meanwhile, many experienced engineers want flexible, meaningful work — not tied to one employer, not reduced to hourly gigs. The expertise exists. The need exists. The connection doesn't.
               </p>
               <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "#f6f3ee", lineHeight: 1.6, fontWeight: 400, marginTop: "20px" }}>
-                <span style={{ color: "var(--orange)", fontWeight: 700 }}>Vakwerk</span> is that bridge.
+                Vakwerk is that bridge.
               </p>
             </div>
           </div>
@@ -415,59 +378,50 @@ export default function App() {
       {/* SERVICES */}
       <section id="services" style={{ padding: "120px var(--pad)" }} className="section-pad">
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-
-          {/* Black band: "What we deliver" header + the 3 service cards */}
-          <div style={{
-            background: "var(--black)",
-            marginLeft: "calc(-1 * var(--pad))", marginRight: "calc(-1 * var(--pad))",
-            paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
-            paddingTop: "72px", paddingBottom: "72px",
-          }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "64px", flexWrap: "wrap", gap: "24px" }}>
-              <div>
-                <Label>What we deliver</Label>
-                <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(32px, 4.5vw, 52px)", lineHeight: 0.95, marginTop: "16px", letterSpacing: "-0.5px", color: "#f6f3ee" }}>
-                  Engineering capacity<br />at the scale you need.
-                </h2>
-              </div>
-              <div style={{ width: "280px" }}>
-                <GradientTruss width={280} height={32} panels={6} opacity={0.7} id="svcHeaderTruss" />
-              </div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "64px", flexWrap: "wrap", gap: "24px" }}>
+            <div>
+              <Label>What we deliver</Label>
+              <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(32px, 4.5vw, 52px)", lineHeight: 0.95, marginTop: "16px", letterSpacing: "-0.5px" }}>
+                Engineering capacity<br />at the scale you need.
+              </h2>
             </div>
+            <div style={{ width: "280px", opacity: 0.15 }}>
+              <TrussOnly width={280} height={32} panels={6} color="#090807" opacity={1} />
+            </div>
+          </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 48px" }} className="three-col">
-              {[
-                {
-                  num: "I",
-                  title: "Fractional Plant Engineer",
-                  body: "Someone who knows your machines as well as you do. Health checks, small fixes before they become downtime, full visibility into what's actually happening on the floor — owned by us, not delegated.",
-                  tags: ["Retainer-based", "Proactive", "Embedded"],
-                },
-                {
-                  num: "II",
-                  title: "Fractional R&D Engineer",
-                  body: "New machine concepts, test rigs, smart automation — from first sketch to a commissioned, working system. One point of contact, not three vendors to coordinate.",
-                  tags: ["Fixed scope", "Full-stack", "New builds"],
-                },
-                {
-                  num: "III",
-                  title: "CE & Documentation",
-                  body: "Risk assessment, technical file, Betriebsanleitung and Declaration of Conformity. Part of every machine delivery, not an afterthought.",
-                  tags: ["2006/42/EG", "ISO 12100", "Annex VII"],
-                },
-              ].map((s, i) => (
-                <div key={i} className="svc-card-dark">
-                  <Label style={{ color: "var(--orange)", marginBottom: "20px", display: "block" }}>{s.num}</Label>
-                  <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px", lineHeight: 1.2, letterSpacing: "-0.2px", color: "#f6f3ee" }}>{s.title}</h3>
-                  <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "#9a9590", lineHeight: 1.6, marginTop: "16px", fontWeight: 300 }}>{s.body}</p>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "20px" }}>
-                    {s.tags.map(t => (
-                      <span key={t} style={{ fontFamily: "var(--mono)", fontSize: "10.5px", letterSpacing: "1px", textTransform: "uppercase", color: "#9a9590", border: "1px solid rgba(255,255,255,0.15)", padding: "4px 9px" }}>{t}</span>
-                    ))}
-                  </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 48px" }} className="three-col">
+            {[
+              {
+                num: "I",
+                title: "Fractional Plant Engineer",
+                body: "Someone who knows your machines as well as you do. Health checks, small fixes before they become downtime, full visibility into what's actually happening on the floor — owned by us, not delegated.",
+                tags: ["Retainer-based", "Proactive", "Embedded"],
+              },
+              {
+                num: "II",
+                title: "Fractional R&D Engineer",
+                body: "New machine concepts, test rigs, smart automation — from first sketch to a commissioned, working system. One point of contact, not three vendors to coordinate.",
+                tags: ["Fixed scope", "Full-stack", "New builds"],
+              },
+              {
+                num: "III",
+                title: "CE & Documentation",
+                body: "Risk assessment, technical file, Betriebsanleitung and Declaration of Conformity. Part of every machine delivery, not an afterthought.",
+                tags: ["2006/42/EG", "ISO 12100", "Annex VII"],
+              },
+            ].map((s, i) => (
+              <div key={i} className="svc-card">
+                <Label style={{ color: "var(--orange)", marginBottom: "20px", display: "block" }}>{s.num}</Label>
+                <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px", lineHeight: 1.2, letterSpacing: "-0.2px" }}>{s.title}</h3>
+                <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.6, marginTop: "16px", fontWeight: 300 }}>{s.body}</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "20px" }}>
+                  {s.tags.map(t => (
+                    <span key={t} style={{ fontFamily: "var(--mono)", fontSize: "10.5px", letterSpacing: "1px", textTransform: "uppercase", color: "var(--gray)", border: "1px solid var(--line)", padding: "4px 9px" }}>{t}</span>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
 
           {/* Retainer scale — belongs to "Fractional Plant Engineer" above, not a separate pitch */}
