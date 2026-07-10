@@ -338,7 +338,7 @@ export default function App() {
                 Meanwhile, many experienced engineers want flexible, meaningful work — not tied to one employer, not reduced to hourly gigs. The expertise exists. The need exists. The connection doesn't.
               </p>
               <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "#f6f3ee", lineHeight: 1.6, fontWeight: 400, marginTop: "20px" }}>
-                Vakwerk is that bridge.
+                <span style={{ color: "var(--orange)", fontWeight: 700 }}>Vakwerk</span> is that bridge.
               </p>
             </div>
           </div>
@@ -349,28 +349,24 @@ export default function App() {
       <section style={{ padding: "120px var(--pad)", borderBottom: "1px solid var(--line)" }} className="section-pad">
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <Label>How we work</Label>
-          <div style={{ marginTop: "48px" }}>
+          <div style={{ marginTop: "56px", display: "flex", flexDirection: "column", gap: "40px" }}>
             {[
               <>We <span style={{ color: "var(--orange)" }}>bring</span> engineers. We <span style={{ color: "#3d7ea8" }}>take</span> responsibility.</>,
               "Your problem is ours until it's solved.",
             ].map((line, i) => (
-              <div key={i}>
-                <Rule />
-                <p className="manifesto-text" style={{
-                  fontFamily: "var(--display)", fontWeight: 600,
-                  fontSize: "clamp(24px, 3.2vw, 42px)", lineHeight: 1.25,
-                  padding: "28px 0", letterSpacing: "-0.3px",
-                  color: hovered === i ? "var(--orange)" : "var(--black)",
-                  paddingLeft: hovered === i ? "12px" : "0",
-                  transition: "color 0.2s, padding-left 0.2s",
-                  cursor: "default",
-                }}
-                  onMouseEnter={() => setHovered(i)}
-                  onMouseLeave={() => setHovered(null)}
-                >{line}</p>
-              </div>
+              <p key={i} className="manifesto-text" style={{
+                fontFamily: "var(--display)", fontWeight: 600,
+                fontSize: "clamp(24px, 3.2vw, 42px)", lineHeight: 1.25,
+                letterSpacing: "-0.3px",
+                color: hovered === i ? "var(--orange)" : "var(--black)",
+                paddingLeft: hovered === i ? "12px" : "0",
+                transition: "color 0.2s, padding-left 0.2s",
+                cursor: "default",
+              }}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+              >{line}</p>
             ))}
-            <Rule />
           </div>
         </div>
       </section>
