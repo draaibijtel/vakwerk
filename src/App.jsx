@@ -243,7 +243,7 @@ export default function App() {
           </span>
         </a>
         <div className="nav-links" style={{ display: "flex", gap: "36px", alignItems: "center" }}>
-          {[["#services", "Services"], ["#founder", "Founder"]].map(([href, label]) => (
+          {[["#services", "Services"], ["#retainer", "Retainer"], ["#stack", "Stack"], ["#founder", "Founder"]].map(([href, label]) => (
             <a key={href} href={href} className="nav-link">{label}</a>
           ))}
           <a href="#contact" style={{
@@ -423,72 +423,71 @@ export default function App() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Retainer scale — belongs to "Fractional Plant Engineer" above, not a separate pitch */}
-          <div style={{ marginTop: "88px", paddingTop: "56px", borderTop: "1px solid var(--line)" }}>
-            <Label>How the retainer scales</Label>
-            <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.6, marginTop: "14px", maxWidth: "560px", fontWeight: 300 }}>
-              Every engagement starts small and grows only as far as the operation needs.
-            </p>
+      {/* RETAINER — its own section: applies to all three services above, not just one */}
+      <section id="retainer" style={{ padding: "120px var(--pad)", background: "#f0ece4", borderTop: "1px solid var(--line)" }} className="section-pad">
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <Label>How the retainer scales</Label>
+          <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(28px, 4vw, 44px)", lineHeight: 1, marginTop: "16px", letterSpacing: "-0.5px" }}>
+            Every engagement starts small<br />and grows only as far as it needs to.
+          </h2>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 40px", marginTop: "56px", alignItems: "start" }} className="three-col">
-              {[
-                { tier: "Foundation", cadence: "≈ 2 days / month", panels: 3, trussW: 160, trussH: 22,
-                  desc: "Preventive checks, system health monitoring, remote support on call." },
-                { tier: "Active Partner", cadence: "≈ 4–6 days / month", panels: 5, trussW: 240, trussH: 34,
-                  desc: "Everything in Foundation, plus active improvements, data analysis, CE documentation." },
-                { tier: "Project Burst", cadence: "Defined scope", panels: 8, trussW: 320, trussH: 48,
-                  desc: "Larger builds layered on top — fixed scope, fixed price." },
-              ].map((t, i) => (
-                <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-                  <Label style={{ color: "var(--orange)", marginBottom: "4px" }}>{`0${i + 1}`}</Label>
-                  <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px", marginBottom: "6px" }}>{t.tier}</h3>
-                  <Label style={{ marginBottom: "20px" }}>{t.cadence}</Label>
-                  <div style={{ height: "56px", display: "flex", alignItems: "flex-end", marginBottom: "16px" }}>
-                    <TrussOnly width={t.trussW} height={t.trussH} panels={t.panels} color="#e03d00" opacity={0.5} />
-                  </div>
-                  <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.5, fontWeight: 300, maxWidth: "260px" }}>{t.desc}</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 40px", marginTop: "64px", alignItems: "start" }} className="three-col">
+            {[
+              { tier: "Foundation", cadence: "≈ 2 days / month", panels: 3, trussW: 160, trussH: 22,
+                desc: "Preventive checks, system health monitoring, remote support on call." },
+              { tier: "Active Partner", cadence: "≈ 4–6 days / month", panels: 5, trussW: 240, trussH: 34,
+                desc: "Everything in Foundation, plus active improvements, data analysis, CE documentation." },
+              { tier: "Project Burst", cadence: "Defined scope", panels: 8, trussW: 320, trussH: 48,
+                desc: "Larger builds layered on top — fixed scope, fixed price." },
+            ].map((t, i) => (
+              <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                <Label style={{ color: "var(--orange)", marginBottom: "4px" }}>{`0${i + 1}`}</Label>
+                <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px", marginBottom: "6px" }}>{t.tier}</h3>
+                <Label style={{ marginBottom: "20px" }}>{t.cadence}</Label>
+                <div style={{ height: "56px", display: "flex", alignItems: "flex-end", marginBottom: "16px" }}>
+                  <TrussOnly width={t.trussW} height={t.trussH} panels={t.panels} color="#e03d00" opacity={0.5} />
                 </div>
-              ))}
-            </div>
-
-            <div style={{ marginTop: "40px", paddingTop: "16px", borderTop: "1px solid var(--line)", display: "flex", justifyContent: "space-between" }}>
-              <Label>Less commitment</Label>
-              <Label style={{ color: "var(--orange)" }}>↑ scope · cadence · depth ↑</Label>
-              <Label>More commitment</Label>
-            </div>
+                <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.5, fontWeight: 300, maxWidth: "260px" }}>{t.desc}</p>
+              </div>
+            ))}
           </div>
 
-          {/* Disciplines — the technical engine behind the three services above, not a separate pitch */}
-          <div style={{
-            marginTop: "88px", paddingTop: "56px", borderTop: "1px solid var(--line)",
-            background: "#f0ece4",
-            marginLeft: "calc(-1 * var(--pad))", marginRight: "calc(-1 * var(--pad))",
-            paddingLeft: "var(--pad)", paddingRight: "var(--pad)", paddingBottom: "56px",
-          }}>
-            <Label>Built from four disciplines</Label>
-            <h3 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(24px, 3.2vw, 34px)", marginTop: "14px", letterSpacing: "-0.4px", lineHeight: 1.1 }}>
-              From bolt to browser.
-            </h3>
-            <div style={{ marginTop: "40px" }}>
-              {[
-                { num: "01", label: "Mechanical Design", desc: "Mechanisms, fixtures, test rigs. Designed for manufacturability, built to last.", tags: "SolidWorks · FEA · GD&T · BOM" },
-                { num: "02", label: "PLC & Control", desc: "Deterministic machine logic. State machines, motion coordination, safety, fault handling.", tags: "Allen Bradley · Beckhoff · IEC 61131-3" },
-                { num: "03", label: "Browser HMI", desc: "No SCADA licences. Any device, any browser. Real-time data, alarms, user management.", tags: "React · WebSocket · REST · Node-RED" },
-                { num: "04", label: "Time-Series Data", desc: "Every cycle logged. OEE, torque curves, Pareto analysis, anomaly detection.", tags: "InfluxDB · Grafana · Flux · MQTT" },
-              ].map((d, i) => (
-                <div key={i} className="disc-item">
-                  <Label style={{ color: "var(--orange)", paddingTop: "2px" }}>{d.num}</Label>
-                  <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
-                      <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px" }}>{d.label}</h3>
-                      <Label>{d.tags}</Label>
-                    </div>
-                    <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.5, marginTop: "8px", fontWeight: 300 }}>{d.desc}</p>
+          <div style={{ marginTop: "48px", paddingTop: "16px", borderTop: "1px solid rgba(9,8,7,0.12)", display: "flex", justifyContent: "space-between" }}>
+            <Label>Less commitment</Label>
+            <Label style={{ color: "var(--orange)" }}>↑ scope · cadence · depth ↑</Label>
+            <Label>More commitment</Label>
+          </div>
+        </div>
+      </section>
+
+      {/* DISCIPLINES — its own section: the technical engine behind the three services above */}
+      <section id="stack" style={{ padding: "120px var(--pad)", borderTop: "1px solid var(--line)" }} className="section-pad">
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <Label>Built from four disciplines</Label>
+          <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(28px, 4vw, 46px)", marginTop: "16px", letterSpacing: "-0.5px", lineHeight: 1 }}>
+            From bolt to browser.
+          </h2>
+          <div style={{ marginTop: "56px" }}>
+            {[
+              { num: "01", label: "Mechanical Design", desc: "Mechanisms, fixtures, test rigs. Designed for manufacturability, built to last.", tags: "SolidWorks · FEA · GD&T · BOM" },
+              { num: "02", label: "PLC & Control", desc: "Deterministic machine logic. State machines, motion coordination, safety, fault handling.", tags: "Allen Bradley · Beckhoff · IEC 61131-3" },
+              { num: "03", label: "Browser HMI", desc: "No SCADA licences. Any device, any browser. Real-time data, alarms, user management.", tags: "React · WebSocket · REST · Node-RED" },
+              { num: "04", label: "Time-Series Data", desc: "Every cycle logged. OEE, torque curves, Pareto analysis, anomaly detection.", tags: "InfluxDB · Grafana · Flux · MQTT" },
+            ].map((d, i) => (
+              <div key={i} className="disc-item">
+                <Label style={{ color: "var(--orange)", paddingTop: "2px" }}>{d.num}</Label>
+                <div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
+                    <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px" }}>{d.label}</h3>
+                    <Label>{d.tags}</Label>
                   </div>
+                  <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.5, marginTop: "8px", fontWeight: 300 }}>{d.desc}</p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
