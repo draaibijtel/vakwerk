@@ -267,7 +267,7 @@ export default function App() {
           </div>
 
           <p className="f4" style={{
-            fontFamily: "var(--display)", fontWeight: 300, fontSize: "20px",
+            fontFamily: "var(--display)", fontWeight: 300, fontSize: "18px",
             color: "var(--gray)", marginTop: "32px", maxWidth: "500px", lineHeight: 1.6,
           }}>
             We solve industrial engineering problems for Small and Medium-sized Enterprises —
@@ -316,7 +316,7 @@ export default function App() {
               <Label style={{ color: "#6b6860" }}>The problem</Label>
               <h2 className="problem-head" style={{
                 fontFamily: "var(--display)", fontWeight: 700,
-                fontSize: "clamp(28px, 3.5vw, 44px)", color: "#f6f3ee",
+                fontSize: "clamp(32px, 4vw, 48px)", color: "#f6f3ee",
                 lineHeight: 1.15, marginTop: "20px", letterSpacing: "-0.5px",
               }}>
                 Expertise: rare.<br />
@@ -331,13 +331,13 @@ export default function App() {
               <Label style={{ marginTop: "10px", display: "block", color: "#4a453d" }}>Two sides. No span between them. Yet.</Label>
             </div>
             <div style={{ paddingTop: "4px" }}>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "#6b6860", lineHeight: 1.6, fontWeight: 300 }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "#6b6860", lineHeight: 1.7, fontWeight: 300 }}>
                 Mid-sized industrial companies run complex machines — but often can't justify a full-time senior engineer. They rely on machine builders who are long gone, or on knowledge that lives only in one person's head.
               </p>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "#6b6860", lineHeight: 1.6, fontWeight: 300, marginTop: "20px" }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "#6b6860", lineHeight: 1.7, fontWeight: 300, marginTop: "20px" }}>
                 Meanwhile, many experienced engineers want flexible, meaningful work — not tied to one employer, not reduced to hourly gigs. The expertise exists. The need exists. The connection doesn't.
               </p>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "#f6f3ee", lineHeight: 1.6, fontWeight: 400, marginTop: "20px" }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "#f6f3ee", lineHeight: 1.7, fontWeight: 400, marginTop: "20px" }}>
                 <span style={{ color: "var(--orange)", fontWeight: 700 }}>Vakwerk</span> is that bridge.
               </p>
             </div>
@@ -377,7 +377,7 @@ export default function App() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "64px", flexWrap: "wrap", gap: "24px" }}>
             <div>
               <Label>What we deliver</Label>
-              <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(32px, 4.5vw, 52px)", lineHeight: 0.95, marginTop: "16px", letterSpacing: "-0.5px" }}>
+              <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(36px, 5vw, 56px)", lineHeight: 0.95, marginTop: "16px", letterSpacing: "-0.5px" }}>
                 Engineering capacity<br />at the scale you need.
               </h2>
             </div>
@@ -409,8 +409,8 @@ export default function App() {
             ].map((s, i) => (
               <div key={i} className="svc-card">
                 <Label style={{ color: "var(--orange)", marginBottom: "20px", display: "block" }}>{s.num}</Label>
-                <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px", lineHeight: 1.2, letterSpacing: "-0.2px" }}>{s.title}</h3>
-                <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.6, marginTop: "16px", fontWeight: 300 }}>{s.body}</p>
+                <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "22px", lineHeight: 1.2, letterSpacing: "-0.2px" }}>{s.title}</h3>
+                <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.7, marginTop: "16px", fontWeight: 300 }}>{s.body}</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "20px" }}>
                   {s.tags.map(t => (
                     <span key={t} style={{ fontFamily: "var(--mono)", fontSize: "10.5px", letterSpacing: "1px", textTransform: "uppercase", color: "var(--gray)", border: "1px solid var(--line)", padding: "4px 9px" }}>{t}</span>
@@ -426,7 +426,7 @@ export default function App() {
       <section id="retainer" style={{ padding: "120px var(--pad)", background: "#f0ece4", borderTop: "1px solid var(--line)" }} className="section-pad">
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <Label>How the retainer scales</Label>
-          <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(28px, 4vw, 44px)", lineHeight: 1, marginTop: "16px", letterSpacing: "-0.5px" }}>
+          <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(32px, 4.5vw, 48px)", lineHeight: 1, marginTop: "16px", letterSpacing: "-0.5px" }}>
             Every engagement starts small<br />and grows only as far as it needs to.
           </h2>
 
@@ -441,12 +441,12 @@ export default function App() {
             ].map((t, i) => (
               <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
                 <Label style={{ color: "var(--orange)", marginBottom: "4px" }}>{`0${i + 1}`}</Label>
-                <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px", marginBottom: "6px" }}>{t.tier}</h3>
+                <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "22px", marginBottom: "6px" }}>{t.tier}</h3>
                 <Label style={{ marginBottom: "20px" }}>{t.cadence}</Label>
                 <div style={{ height: "56px", display: "flex", alignItems: "flex-end", marginBottom: "16px" }}>
                   <TrussOnly width={t.trussW} height={t.trussH} panels={t.panels} color="#e03d00" opacity={0.5} />
                 </div>
-                <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.5, fontWeight: 300, maxWidth: "260px" }}>{t.desc}</p>
+                <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.6, fontWeight: 300, maxWidth: "260px" }}>{t.desc}</p>
               </div>
             ))}
           </div>
@@ -463,7 +463,7 @@ export default function App() {
       <section id="stack" style={{ padding: "120px var(--pad)", borderTop: "1px solid var(--line)" }} className="section-pad">
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <Label>Built from four disciplines</Label>
-          <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(28px, 4vw, 46px)", marginTop: "16px", letterSpacing: "-0.5px", lineHeight: 1 }}>
+          <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(32px, 4.5vw, 50px)", marginTop: "16px", letterSpacing: "-0.5px", lineHeight: 1 }}>
             From bolt to browser.
           </h2>
           <div style={{ marginTop: "56px" }}>
@@ -477,10 +477,10 @@ export default function App() {
                 <Label style={{ color: "var(--orange)", paddingTop: "2px" }}>{d.num}</Label>
                 <div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
-                    <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px" }}>{d.label}</h3>
+                    <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "22px" }}>{d.label}</h3>
                     <Label>{d.tags}</Label>
                   </div>
-                  <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.5, marginTop: "8px", fontWeight: 300 }}>{d.desc}</p>
+                  <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.6, marginTop: "8px", fontWeight: 300 }}>{d.desc}</p>
                 </div>
               </div>
             ))}
@@ -503,15 +503,15 @@ export default function App() {
               </div>
             </div>
             <div>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.6, fontWeight: 300 }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.7, fontWeight: 300 }}>
                 Mechanical engineer with 20+ years of industrial experience and 3+ years operating as a freelance engineering partner — spanning mechanical design, PLC control, browser-based HMI development and time-series data infrastructure.
               </p>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.6, fontWeight: 300, marginTop: "20px" }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.7, fontWeight: 300, marginTop: "20px" }}>
                 Vakwerk began as one engineer able to cover that much ground alone — and is built to grow into a small network of senior partners who work the same way, each accountable end-to-end rather than handed off between specialists.
               </p>
               <div style={{ marginTop: "32px", paddingTop: "32px", borderTop: "1px solid var(--line)" }}>
                 <Label>Background</Label>
-                <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.6, marginTop: "10px", fontWeight: 300 }}>
+                <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.7, marginTop: "10px", fontWeight: 300 }}>
                   Dutch roots, based in Germany. Fluent in Deutsch, English and Nederlands — moves between German SME culture and international engineering standards without friction.
                 </p>
               </div>
@@ -527,7 +527,7 @@ export default function App() {
           <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(36px, 6vw, 70px)", color: "#f6f3ee", lineHeight: 0.95, marginTop: "20px", letterSpacing: "-1px" }}>
             Got a problem<br />worth solving<span style={{ color: "var(--orange)" }}>?</span>
           </h2>
-          <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "#6b6860", lineHeight: 1.6, marginTop: "32px", maxWidth: "440px", fontWeight: 300 }}>
+          <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "#6b6860", lineHeight: 1.7, marginTop: "32px", maxWidth: "440px", fontWeight: 300 }}>
             We work with a small number of clients at any time. If that's a fit, let's have a direct conversation.
           </p>
           <div style={{ marginTop: "48px" }}>
