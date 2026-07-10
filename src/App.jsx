@@ -255,13 +255,13 @@ export default function App() {
       </nav>
 
       {/* HERO */}
-      <section id="top" style={{ paddingTop: "52px", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-        <div style={{ padding: "40px var(--pad) 0", display: "flex", alignItems: "center", gap: "20px" }}>
+      <section id="top" style={{ paddingTop: "52px", minHeight: "92vh", display: "flex", flexDirection: "column" }}>
+        <div style={{ padding: "20px var(--pad) 0", display: "flex", alignItems: "center", gap: "20px" }}>
           <div style={{ height: "1px", flex: 1, background: "var(--orange)", transformOrigin: "left", animation: "drawLine 0.9s ease both 0.1s" }} />
           <Label className="f1">Fractional Engineering Partners</Label>
         </div>
 
-        <div style={{ padding: "32px var(--pad) 0", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <div style={{ padding: "12px var(--pad) 0", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <div className="f2" style={{ display: "inline-block" }}>
             <VakwerkLogo width="min(680px, 88vw)" dark={false} panels={6} />
           </div>
@@ -270,7 +270,7 @@ export default function App() {
             fontFamily: "var(--display)", fontWeight: 300, fontSize: "20px",
             color: "var(--gray)", marginTop: "32px", maxWidth: "500px", lineHeight: 1.6,
           }}>
-            We solve industrial engineering problems for the Mittelstand —
+            We solve industrial engineering problems for Small and Medium-sized Enterprises —
             mechanically, digitally, and at the pace your operation demands.
           </p>
 
@@ -286,7 +286,7 @@ export default function App() {
           </div>
         </div>
 
-        <div style={{ borderTop: "1px solid var(--line)", marginTop: "60px" }}>
+        <div style={{ borderTop: "1px solid var(--line)", marginTop: "28px" }}>
           <div style={{ padding: "0 var(--pad)", display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }} className="four-col">
             {[
               ["3+", "Years delivering"],
@@ -331,13 +331,13 @@ export default function App() {
               <Label style={{ marginTop: "10px", display: "block", color: "#4a453d" }}>Two sides. No span between them. Yet.</Label>
             </div>
             <div style={{ paddingTop: "4px" }}>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#6b6860", lineHeight: 1.9, fontWeight: 300 }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "#6b6860", lineHeight: 1.6, fontWeight: 300 }}>
                 Mid-sized industrial companies run complex machines — but often can't justify a full-time senior engineer. They rely on machine builders who are long gone, or on knowledge that lives only in one person's head.
               </p>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#6b6860", lineHeight: 1.9, fontWeight: 300, marginTop: "20px" }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "#6b6860", lineHeight: 1.6, fontWeight: 300, marginTop: "20px" }}>
                 Meanwhile, many experienced engineers want flexible, meaningful work — not tied to one employer, not reduced to hourly gigs. The expertise exists. The need exists. The connection doesn't.
               </p>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#f6f3ee", lineHeight: 1.9, fontWeight: 400, marginTop: "20px" }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "#f6f3ee", lineHeight: 1.6, fontWeight: 400, marginTop: "20px" }}>
                 Vakwerk is that bridge.
               </p>
             </div>
@@ -414,7 +414,7 @@ export default function App() {
               <div key={i} className="svc-card">
                 <Label style={{ color: "var(--orange)", marginBottom: "20px", display: "block" }}>{s.num}</Label>
                 <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px", lineHeight: 1.2, letterSpacing: "-0.2px" }}>{s.title}</h3>
-                <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.85, marginTop: "16px", fontWeight: 300 }}>{s.body}</p>
+                <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.6, marginTop: "16px", fontWeight: 300 }}>{s.body}</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "20px" }}>
                   {s.tags.map(t => (
                     <span key={t} style={{ fontFamily: "var(--mono)", fontSize: "10.5px", letterSpacing: "1px", textTransform: "uppercase", color: "var(--gray)", border: "1px solid var(--line)", padding: "4px 9px" }}>{t}</span>
@@ -427,7 +427,7 @@ export default function App() {
           {/* Retainer scale — belongs to "Fractional Plant Engineer" above, not a separate pitch */}
           <div style={{ marginTop: "88px", paddingTop: "56px", borderTop: "1px solid var(--line)" }}>
             <Label>How the retainer scales</Label>
-            <p style={{ fontFamily: "var(--mono)", fontSize: "16px", color: "var(--gray)", lineHeight: 1.7, marginTop: "14px", maxWidth: "560px", fontWeight: 300 }}>
+            <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.6, marginTop: "14px", maxWidth: "560px", fontWeight: 300 }}>
               Every engagement starts small and grows only as far as the operation needs.
             </p>
 
@@ -447,7 +447,7 @@ export default function App() {
                   <div style={{ height: "56px", display: "flex", alignItems: "flex-end", marginBottom: "16px" }}>
                     <TrussOnly width={t.trussW} height={t.trussH} panels={t.panels} color="#e03d00" opacity={0.5} />
                   </div>
-                  <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.8, fontWeight: 300, maxWidth: "260px" }}>{t.desc}</p>
+                  <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.5, fontWeight: 300, maxWidth: "260px" }}>{t.desc}</p>
                 </div>
               ))}
             </div>
@@ -484,7 +484,7 @@ export default function App() {
                       <h3 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "20px" }}>{d.label}</h3>
                       <Label>{d.tags}</Label>
                     </div>
-                    <p style={{ fontFamily: "var(--mono)", fontSize: "13px", color: "var(--gray)", lineHeight: 1.8, marginTop: "8px", fontWeight: 300 }}>{d.desc}</p>
+                    <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.5, marginTop: "8px", fontWeight: 300 }}>{d.desc}</p>
                   </div>
                 </div>
               ))}
@@ -508,16 +508,16 @@ export default function App() {
               </div>
             </div>
             <div>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "var(--gray)", lineHeight: 1.9, fontWeight: 300 }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.6, fontWeight: 300 }}>
                 Mechanical engineer with 20+ years of industrial experience and 3+ years operating as a freelance engineering partner — spanning mechanical design, PLC control, browser-based HMI development and time-series data infrastructure.
               </p>
-              <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "var(--gray)", lineHeight: 1.9, fontWeight: 300, marginTop: "20px" }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.6, fontWeight: 300, marginTop: "20px" }}>
                 Vakwerk began as one engineer able to cover that much ground alone — and is built to grow into a small network of senior partners who work the same way, each accountable end-to-end rather than handed off between specialists.
               </p>
               <div style={{ marginTop: "32px", paddingTop: "32px", borderTop: "1px solid var(--line)" }}>
                 <Label>Background</Label>
-                <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "var(--gray)", lineHeight: 1.9, marginTop: "10px", fontWeight: 300 }}>
-                  Dutch roots, based in Germany. Fluent in Deutsch, English and Nederlands — moves between German Mittelstand culture and international engineering standards without friction.
+                <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "var(--gray)", lineHeight: 1.6, marginTop: "10px", fontWeight: 300 }}>
+                  Dutch roots, based in Germany. Fluent in Deutsch, English and Nederlands — moves between German SME culture and international engineering standards without friction.
                 </p>
               </div>
             </div>
@@ -532,7 +532,7 @@ export default function App() {
           <h2 style={{ fontFamily: "var(--display)", fontWeight: 700, fontSize: "clamp(36px, 6vw, 70px)", color: "#f6f3ee", lineHeight: 0.95, marginTop: "20px", letterSpacing: "-1px" }}>
             Got a problem<br />worth solving<span style={{ color: "var(--orange)" }}>?</span>
           </h2>
-          <p style={{ fontFamily: "var(--mono)", fontSize: "14px", color: "#6b6860", lineHeight: 1.9, marginTop: "32px", maxWidth: "440px", fontWeight: 300 }}>
+          <p style={{ fontFamily: "var(--mono)", fontSize: "20px", color: "#6b6860", lineHeight: 1.6, marginTop: "32px", maxWidth: "440px", fontWeight: 300 }}>
             We work with a small number of clients at any time. If that's a fit, let's have a direct conversation.
           </p>
           <div style={{ marginTop: "48px" }}>
